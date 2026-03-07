@@ -5,14 +5,14 @@ const StyledLogo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 9.6rem;
+  height: 18rem;
   width: auto;
 `;
 
 const Logo:React.FC = () => {
   return (
     <StyledLogo>
-      <Img src="/logo-light.png" alt="Logo" />
+      <Img src="/LogoDark.png" alt="Logo" />
     </StyledLogo>
   );
 }
