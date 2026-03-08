@@ -32,7 +32,7 @@ const TableHeader = styled.header`
 const CabinTable: React.FC = () => {
   
   const {isLoading , data:cabins,error} = useQuery({
-    queryKey: ['cabin'],
+    queryKey: ['cabins'],
     queryFn:  getCabins,
   })
   
