@@ -17,6 +17,14 @@ const StyledAppLayout = styled.div`
   
   `
 
+const Container = styled.div`
+  max-width:120rem;
+  margin:0 auto  ;
+  display : flex ; 
+  flex-direction :column ; 
+  gap : 3.2rem ;
+  `
+
 const AppLayout: React.FC = () => {
   
   return (
@@ -24,7 +32,9 @@ const AppLayout: React.FC = () => {
     <Header/>
       <Sidebar />
       <Main>
-        <Outlet/>
+        <Container>
+          <Outlet/>
+        </Container>
       </Main>
     </StyledAppLayout>
   )
