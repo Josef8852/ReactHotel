@@ -13,3 +13,5 @@ interface Cabin {
 export interface CabinRowProps {
   cabin: Cabin;
 }
+
+export type SubmitData = Omit<Cabin, "id" | "imageUrl">;

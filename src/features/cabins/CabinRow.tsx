@@ -5,7 +5,7 @@ import { deleteCabin } from "../../services/apiCabins";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
-
+import Button from "../../ui/Button";
 
 
 const TableRow = styled.div`
@@ -80,7 +80,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
       <div>Fits up to {cabin.maxCapacity}</div>
       <Price>{formatCurrency(cabin.regularPrice)}</Price>
       <Discount>{formatCurrency(cabin.discount)}</Discount>
-      <button disabled={isPending} onClick={() => mutate(cabin.id)}>Delete</button>
+      <Button size="small" variant="primary" disabled={isPending} onClick={() => mutate(cabin.id)}>Delete</Button>
     </TableRow>
   )
   
