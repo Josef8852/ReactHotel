@@ -1,3 +1,5 @@
+
+//DB
 export interface Cabin {
   id: number;
   name: string;
@@ -5,11 +7,19 @@ export interface Cabin {
   regularPrice: number;
   discount: number;
   description: string;
-  imageUrl: string;
+  image: string ;
 }
+
+//Form
+export type CabinFormValues = Omit<Cabin, "image"> & {
+  image: FileList;
+};
+
+//Upload image
+export type NewCabin = Omit<Cabin, 'image'> & {
+  image: File;
+};
 
 export interface CabinRowProps {
   cabin: Cabin;
 }
-
-

@@ -4,19 +4,19 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import {useForm} from "react-hook-form"
-import type { Cabin } from "./CabinTypes";
+import type { CabinFormValues } from "./CabinTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import Spinner from "../../ui/Spinner";
 import FormRow from "../../ui/FormRow";
-
+import Error from "../../ui/Error";
 
 const CabinForm: React.FC = () => {
   
   const queryClient = useQueryClient();
   
-  const { register, handleSubmit, reset, getValues, formState } = useForm<Cabin>();
+  const { register, handleSubmit, reset, getValues, formState } = useForm<CabinFormValues>();
   
   const { errors }  = formState;
   
@@ -41,8 +41,11 @@ const CabinForm: React.FC = () => {
   
   
   
-  const onSubmit = (data : Cabin) : void => {
-    mutate(data);
+  const onSubmit = (data: CabinFormValues): void => {
+    
+    
+    mutate({ ...data, image : data.image[0]});
+    
   }
   
  
@@ -76,8 +79,9 @@ const CabinForm: React.FC = () => {
         <Textarea disabled={isPending}  id="description" defaultValue="" {...register("description")}/>
       </FormRow>
 
-      <FormRow id="image" label="Image URL">
-        <FileInput disabled={isPending} id="image" accept="image/*" />
+      <FormRow id="image" label="Image">
+        <FileInput type="file" disabled={isPending} id="image" accept="image/*" {...register("image", { required: "Please upload an image" })} />
+        <Error>{errors.image?.message}</Error>
       </FormRow>
 
       <FormRow>

@@ -75,7 +75,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   
   return (
     <TableRow role="row">
-      <Img src={cabin.imageUrl} />
+      <Img src={cabin.image} />
       <Cabin>{cabin.name}</Cabin>
       <div>Fits up to {cabin.maxCapacity}</div>
       <Price>{formatCurrency(cabin.regularPrice)}</Price>
