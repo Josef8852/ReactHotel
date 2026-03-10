@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
@@ -10,48 +9,16 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import Spinner from "../../ui/Spinner";
+import FormRow from "../../ui/FormRow";
 
-const FormRow = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
-  gap: 2.4rem;
-
-  padding: 1.2rem 0;
-
-  &:first-child {
-    padding-top: 0;
-  }
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-
-  &:has(button) {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1.2rem;
-  }
-`;
-
-const Label = styled.label`
-  font-weight: 500;
-`;
-
-const Error = styled.span`
-  font-size: 1.4rem;
-  color: var(--color-red-700);
-`;
 
 const CabinForm: React.FC = () => {
   
   const queryClient = useQueryClient();
   
-  const { register , handleSubmit ,reset } = useForm<Cabin>();
+  const { register, handleSubmit, reset, getValues, formState } = useForm<Cabin>();
+  
+  const { errors }  = formState;
   
   const { mutate, isPending } = useMutation({
     
@@ -74,47 +41,50 @@ const CabinForm: React.FC = () => {
   
   
   
-  const onSubmit = (data : Cabin) => {
+  const onSubmit = (data : Cabin) : void => {
     mutate(data);
   }
   
+ 
+  
   return (
     <Form onSubmit={handleSubmit(onSubmit)} >
-      <FormRow>
-        <Label htmlFor="name">Cabin name</Label>
-        <Input required type="text" id="name" {...register("name")} />
+      <FormRow id="name" label="Name" error={errors.name?.message} >
+        <Input disabled={isPending} type="text" id="name" {...register("name", { required: "This field is required" })} />
+      </FormRow>
+
+      <FormRow id="maxCapacity" label="Maximum Capacity" error={errors.maxCapacity?.message}>
+        <Input disabled={isPending} type="number" id="maxCapacity" {...register("maxCapacity",
+          { required: "This field is required", min: { value: 1 , message:"Capacity should be at least 1"} })} />
+      </FormRow>
+
+      <FormRow id="regularPrice" label="Price" error={errors.regularPrice?.message}>
+        <Input disabled={isPending} type="number" id="regularPrice" {...register("regularPrice",
+          {min : {value: 1 , message:"Price should be greater than 0" }})} />
+      </FormRow>
+
+      <FormRow id="discount" label="Discount" error={errors.discount?.message} >
+        <Input disabled={isPending} type="number" id="discount" {...register("discount",
+          {
+            required: "This field is required", 
+            validate : (value) =>  value <= getValues().regularPrice || "Discount should be less than the regular Price"
+          }
+        )} />
+      </FormRow>
+
+      <FormRow id="description" label="Description">
+        <Textarea disabled={isPending}  id="description" defaultValue="" {...register("description")}/>
+      </FormRow>
+
+      <FormRow id="image" label="Image URL">
+        <FileInput disabled={isPending} id="image" accept="image/*" />
       </FormRow>
 
       <FormRow>
-        <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input required type="number" id="maxCapacity" {...register("maxCapacity")} />
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="regularPrice">Regular price</Label>
-        <Input required type="number" id="regularPrice" {...register("regularPrice")} />
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="discount">Discount</Label>
-        <Input required type="number" id="discount" defaultValue={0} {...register("discount")} />
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="description">Description for website</Label>
-        <Textarea required id="description" defaultValue="" {...register("description")}/>
-      </FormRow>
-
-      <FormRow>
-        <Label htmlFor="image">Cabin photo</Label>
-        <FileInput id="image" accept="image/*" />
-      </FormRow>
-
-      <FormRow>
-        <Button variant="secondary" type="reset">
+        <Button  size="small" variant="secondary" type="reset">
           Cancel
         </Button>
-        <Button disabled={isPending}>Edit cabin</Button>
+        <Button size="small" variant="primary" disabled={isPending}>Add Cabin</Button>
       </FormRow>
       {isPending ? <Spinner/> : null}
     </Form>
