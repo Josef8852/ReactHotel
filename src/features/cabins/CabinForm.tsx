@@ -1,32 +1,47 @@
+import {useForm} from "react-hook-form"
+import type { CabinFormProps, CabinFormValues } from "./CabinTypes";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createEditCabin } from "../../services/apiCabins";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import {useForm} from "react-hook-form"
-import type { CabinFormValues } from "./CabinTypes";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 import Spinner from "../../ui/Spinner";
 import FormRow from "../../ui/FormRow";
 import Error from "../../ui/Error";
 
-const CabinForm: React.FC = () => {
+
+const CabinForm: React.FC<CabinFormProps> = ({ cabinToEdit = {} }) => {
+  
+  const { id: editId, ...editValues } = cabinToEdit;
+  
+  const isEditSession: boolean = editId ? true : false;
   
   const queryClient = useQueryClient();
   
-  const { register, handleSubmit, reset, getValues, formState } = useForm<CabinFormValues>();
+  const { register, handleSubmit, reset, getValues, formState } = useForm<CabinFormValues>({
+    defaultValues: isEditSession ? editValues : {} , 
+  });
+  
+  
   
   const { errors }  = formState;
   
   const { mutate, isPending } = useMutation({
     
-    mutationFn: createCabin,
+    mutationFn: createEditCabin,
     
     onSuccess: () => {
       
-      toast.success("Cabin created Successfully");
+      if (editId) {
+        toast.success("Cabin updated Successfully");
+      }
+      else {
+        toast.success("Cabin created Successfully");
+      }
+      
       
       queryClient.invalidateQueries({
         queryKey: ['cabins']
@@ -44,7 +59,19 @@ const CabinForm: React.FC = () => {
   const onSubmit = (data: CabinFormValues): void => {
     
     
-    mutate({ ...data, image : data.image[0]});
+    // string -> image already exists 
+    // FileList contains multiple files 
+    
+    const image: string | File = typeof data.image === "string" ? data.image : data.image[0]
+      ?? cabinToEdit.image 
+      ;
+    
+    mutate({
+      newCabin: { ...data, image }, 
+      id: editId 
+    });
+    
+    
     
   }
   
@@ -53,12 +80,16 @@ const CabinForm: React.FC = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} >
       <FormRow id="name" label="Name" error={errors.name?.message} >
-        <Input disabled={isPending} type="text" id="name" {...register("name", { required: "This field is required" })} />
+        <Input disabled={isPending} type="text" id="name" {...register("name",
+          { required: "This field is required" })} />
       </FormRow>
 
       <FormRow id="maxCapacity" label="Maximum Capacity" error={errors.maxCapacity?.message}>
         <Input disabled={isPending} type="number" id="maxCapacity" {...register("maxCapacity",
-          { required: "This field is required", min: { value: 1 , message:"Capacity should be at least 1"} })} />
+          {
+            required: "This field is required",
+            min: { value: 1, message: "Capacity should be at least 1" }
+          })} />
       </FormRow>
 
       <FormRow id="regularPrice" label="Price" error={errors.regularPrice?.message}>
@@ -80,7 +111,8 @@ const CabinForm: React.FC = () => {
       </FormRow>
 
       <FormRow id="image" label="Image">
-        <FileInput type="file" disabled={isPending} id="image" accept="image/*" {...register("image", { required: "Please upload an image" })} />
+        <FileInput type="file" disabled={isPending} id="image" accept="image/*" {...register("image",
+          { required: isEditSession ?  false :"Please upload an image" })} />
         <Error>{errors.image?.message}</Error>
       </FormRow>
 
@@ -88,7 +120,8 @@ const CabinForm: React.FC = () => {
         <Button  size="small" variant="secondary" type="reset">
           Cancel
         </Button>
-        <Button size="small" variant="primary" disabled={isPending}>Add Cabin</Button>
+        <Button size="small" variant="primary" disabled={isPending}>
+          {isEditSession ? "Edit Cabin" : "Add Cabin"}</Button>
       </FormRow>
       {isPending ? <Spinner/> : null}
     </Form>

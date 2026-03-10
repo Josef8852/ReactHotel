@@ -1,6 +1,6 @@
 
 //DB
-export interface Cabin {
+ interface Cabin {
   id: number;
   name: string;
   maxCapacity: number;
@@ -17,9 +17,13 @@ export type CabinFormValues = Omit<Cabin, "image"> & {
 
 //Upload image
 export type NewCabin = Omit<Cabin, 'image'> & {
-  image: File;
+  image: string | File;
 };
 
 export interface CabinRowProps {
   cabin: Cabin;
+}
+
+export interface CabinFormProps {
+  cabinToEdit?: Cabin | never;
 }

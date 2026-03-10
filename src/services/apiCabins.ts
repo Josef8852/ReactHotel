@@ -1,4 +1,4 @@
-import type { NewCabin } from "../features/cabins/CabinTypes";
+import type { CreateEditCabinArgs } from "./apiTypes";
 import supabase, { supabaseUrl } from "./supabase"
 
 export const getCabins = async () => {
@@ -18,18 +18,29 @@ export const getCabins = async () => {
 
 
 
-export const createCabin = async (newCabin: NewCabin) => {
+export const createEditCabin = async ({newCabin ,id} :CreateEditCabinArgs) => {
   
-  
+  // if an image exists already 
+  const hasImagePath :boolean = (newCabin?.image as string).startsWith?.(supabaseUrl)
   
   const imageName: string =  `${Math.random()}-${(newCabin?.image as File).name}`.replaceAll("/", "");
 
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+  const imagePath = hasImagePath ? newCabin.image :  `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
   
-  const { data, error: createError } = await supabase
-    .from('cabins')
-    .insert([{...newCabin , image:imagePath}]);
+  
+  let query;
+  
+  if (!id) query = supabase
+      .from("cabins")
+      .insert([{ ...newCabin, image: imagePath }]);
+  
+  if(id)   query = supabase
+    .from("cabins")
+    .update({ ...newCabin, image: imagePath })
+    .eq("id", id);
+  
+  const { data, error: createError } = await (query!).select().single();
   
   
   if (createError) {
@@ -37,19 +48,22 @@ export const createCabin = async (newCabin: NewCabin) => {
     throw new Error("Cabins couldnt be created");
   }
   
-  const { error: storageError } = await supabase.storage
-    .from("cabin-images")
-    .upload(imageName, newCabin.image);
+
+    const { error: storageError } = await supabase.storage
+      .from("cabin-images")
+      .upload(imageName, newCabin.image);
+    
+    
+    if (storageError) {
+      await supabase
+        .from('cabins')
+        .delete()
+        .eq("id", newCabin.id);
+      console.error("Image upload failed");
+      throw new Error("Image upload failed");
+    }
   
-  
-  if (storageError) {
-    await supabase
-      .from('cabins')
-      .delete()
-      .eq("id", newCabin.id);
-    console.error("Image upload failed");
-    throw new Error("Image upload failed");
-  }
+ 
 
   return data;
 

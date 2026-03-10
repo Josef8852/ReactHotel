@@ -6,6 +6,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
+import { useState } from "react";
+import  CabinForm from "./CabinForm";
 
 
 const TableRow = styled.div`
@@ -47,8 +49,14 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const Container = styled.div`
+  display : flex ; 
+  gap : 1rem;
+  `
 
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
+  
+  const [showForm, setShowForm] = useState<boolean>(false);
   
   const queryClient = useQueryClient();
   
@@ -74,14 +82,20 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   if(isPending) return <Spinner/>
   
   return (
+    <>
     <TableRow role="row">
       <Img src={cabin.image} />
       <Cabin>{cabin.name}</Cabin>
       <div>Fits up to {cabin.maxCapacity}</div>
       <Price>{formatCurrency(cabin.regularPrice)}</Price>
       <Discount>{formatCurrency(cabin.discount)}</Discount>
-      <Button size="small" variant="primary" disabled={isPending} onClick={() => mutate(cabin.id)}>Delete</Button>
+      <Container> 
+        <Button size="small" variant="primary" disabled={isPending} onClick={() => mutate(cabin.id)}>Delete</Button>
+        <Button onClick={() => setShowForm(!showForm)} variant="primary" size="small">Edit</Button>
+      </Container>
     </TableRow>
+      {showForm ? <CabinForm cabinToEdit={cabin} /> : null }
+    </>
   )
   
 }
