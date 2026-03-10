@@ -5,8 +5,11 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import {useForm} from "react-hook-form"
-import type { SubmitData } from "./CabinTypes";
-
+import type { Cabin } from "./CabinTypes";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
+import Spinner from "../../ui/Spinner";
 
 const FormRow = styled.div`
   display: grid;
@@ -44,41 +47,62 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-const  CabinForm:React.FC = () => {
+const CabinForm: React.FC = () => {
+  
+  const queryClient = useQueryClient();
+  
+  const { register , handleSubmit ,reset } = useForm<Cabin>();
+  
+  const { mutate, isPending } = useMutation({
+    
+    mutationFn: createCabin,
+    
+    onSuccess: () => {
+      
+      toast.success("Cabin created Successfully");
+      
+      queryClient.invalidateQueries({
+        queryKey: ['cabins']
+      });
+      reset();
+    },
+    onError: (err) => {
+      
+      toast.error(err.message);
+    },
+  })
   
   
-  const { register , handleSubmit } = useForm<SubmitData>();
   
-  
-  const onSubmit = (data : SubmitData) => {
-    console.log(data);
+  const onSubmit = (data : Cabin) => {
+    mutate(data);
   }
   
   return (
     <Form onSubmit={handleSubmit(onSubmit)} >
       <FormRow>
         <Label htmlFor="name">Cabin name</Label>
-        <Input type="text" id="name" {...register("name")} />
+        <Input required type="text" id="name" {...register("name")} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input type="number" id="maxCapacity" {...register("maxCapacity")} />
+        <Input required type="number" id="maxCapacity" {...register("maxCapacity")} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="regularPrice">Regular price</Label>
-        <Input type="number" id="regularPrice" {...register("regularPrice")} />
+        <Input required type="number" id="regularPrice" {...register("regularPrice")} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="discount">Discount</Label>
-        <Input type="number" id="discount" defaultValue={0} {...register("discount")} />
+        <Input required type="number" id="discount" defaultValue={0} {...register("discount")} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="description">Description for website</Label>
-        <Textarea  id="description" defaultValue="" {...register("description")}/>
+        <Textarea required id="description" defaultValue="" {...register("description")}/>
       </FormRow>
 
       <FormRow>
@@ -90,8 +114,9 @@ const  CabinForm:React.FC = () => {
         <Button variant="secondary" type="reset">
           Cancel
         </Button>
-        <Button>Edit cabin</Button>
+        <Button disabled={isPending}>Edit cabin</Button>
       </FormRow>
+      {isPending ? <Spinner/> : null}
     </Form>
   );
 }
