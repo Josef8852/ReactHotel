@@ -15,3 +15,12 @@ export interface FormRowProps {
   children: ReactNode;
   id?: string;
 }
+
+export interface ModalProps {
+  children?: ReactNode;
+  setOpenModal?: (state : boolean) => void;
+}
+
+export interface FormProps {
+  type : "modal" | "regular"
+}

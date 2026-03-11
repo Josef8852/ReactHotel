@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import type { ModalProps } from "./UITypes";
+import { HiXMark } from "react-icons/hi2";
+import { createPortal } from "react-dom";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -48,3 +51,27 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+
+const Modal:React.FC<ModalProps> = ({children , setOpenModal}) => {
+  
+  
+  // React Portal -> Render Anywhere (Modal stays in the Component Tree)
+  
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={() => setOpenModal!(false)} >
+          <HiXMark />
+        </Button>
+      <div>
+           {children}
+      </div>
+      </StyledModal>
+    </Overlay>,
+    document.body // Direct Child of <body>
+  )
+  
+}
+
+export default Modal; 

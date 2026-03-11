@@ -11,9 +11,7 @@ export const useUpdateSetting = () => {
   mutationFn: updateSetting,
   
     onSuccess: () => {
-    
-    
-    
+   
       toast.success("Setting updated Successfully");
       
       queryClient.invalidateQueries({

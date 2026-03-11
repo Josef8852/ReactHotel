@@ -11,5 +11,4 @@ export interface SettingsObj {
 
 
 // Update Setting
-// 
 export type SettingToUpdate = Partial<SettingsObj>

@@ -12,7 +12,7 @@ import Error from "../../ui/Error";
 
 
 
-const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit}) => {
+const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , setOpenModal}) => {
   
   const { id: editId, ...editValues } = cabinToEdit ?? {};
   
@@ -45,35 +45,36 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit}) => {
       id: editId 
     });
     
+    setOpenModal?.(false);
     
   }
   
  
   
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} >
+    <Form type={setOpenModal ? "modal" : "regular"} onSubmit={handleSubmit(onSubmit)} >
       <FormRow id="name" label="Name" error={errors.name?.message} >
         <Input disabled={isPending} type="text" id="name" {...register("name",
-          { required: "This field is required" })} />
+          { required: "Required" })} />
       </FormRow>
 
       <FormRow id="maxCapacity" label="Maximum Capacity" error={errors.maxCapacity?.message}>
         <Input disabled={isPending} type="number" id="maxCapacity" {...register("maxCapacity",
           {
-            required: "This field is required",
-            min: { value: 1, message: "Capacity should be at least 1" },
+            required: "Required",
+            min: { value: 1, message: "Capacity at least 1" },
           })} />
       </FormRow>
 
       <FormRow id="regularPrice" label="Price" error={errors.regularPrice?.message}>
         <Input disabled={isPending} type="number" id="regularPrice" {...register("regularPrice",
-          {min : {value: 1 , message:"Price should be greater than 0" }})} />
+          {min : {value: 1 , message:"Price  greater than 0" }})} />
       </FormRow>
 
       <FormRow id="discount" label="Discount" error={errors.discount?.message} >
         <Input defaultValue={0} disabled={isPending} type="number" id="discount" {...register("discount",
           { 
-            validate : (value) =>  Number(value) <= Number(getValues().regularPrice) || "Discount should be less than the regular Price"
+            validate : (value) =>  Number(value) <= Number(getValues().regularPrice) || "Discount  less than the Price"
           }
         )} />
       </FormRow>
@@ -84,12 +85,12 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit}) => {
 
       <FormRow id="image" label="Image">
         <FileInput type="file" disabled={isPending} id="image" accept="image/*" {...register("image",
-          { required: isEditSession ?  false :"Please upload an image" })} />
+          { required: isEditSession ?  false :"Required" })} />
         <Error>{errors.image?.message}</Error>
       </FormRow>
 
       <FormRow>
-        <Button  size="small" variant="secondary" type="reset">
+        <Button onClick={() => setOpenModal?.(false)}  size="small" variant="secondary" type="reset">
           Cancel
         </Button>
         <Button size="small" variant="primary" disabled={isPending}>
