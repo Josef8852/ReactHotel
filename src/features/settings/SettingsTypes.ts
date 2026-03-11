@@ -8,3 +8,8 @@ export interface SettingsObj {
   maxNumberGuestsPerBooking: number; 
   id: number; 
 }
+
+
+// Update Setting
+// 
+export type SettingToUpdate = Partial<SettingsObj>

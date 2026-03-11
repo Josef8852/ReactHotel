@@ -1,5 +1,5 @@
-import type { SettingsObj } from "../features/settings/SettingsTypes";
 import supabase from "./supabase";
+import { type SettingToUpdate } from "../features/settings/SettingsTypes";
 
 export const  getSettings = async () => {
   const { data, error } = await supabase.from("settings").select("*").single();
@@ -12,7 +12,7 @@ export const  getSettings = async () => {
 }
 
 
-export const updateSetting = async (newSetting: SettingsObj) =>  {
+export const updateSetting = async (newSetting: SettingToUpdate) =>  {
   const { data, error } = await supabase
     .from("settings")
     .update(newSetting)
