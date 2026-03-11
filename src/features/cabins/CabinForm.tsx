@@ -1,76 +1,49 @@
 import {useForm} from "react-hook-form"
 import type { CabinFormProps, CabinFormValues } from "./CabinTypes";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createEditCabin } from "../../services/apiCabins";
+import { useCreateUpdateCabin } from "./useCreateUpdateCabin";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
-import toast from "react-hot-toast";
 import Spinner from "../../ui/Spinner";
 import FormRow from "../../ui/FormRow";
 import Error from "../../ui/Error";
 
 
-const CabinForm: React.FC<CabinFormProps> = ({ cabinToEdit = {} }) => {
+
+const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit}) => {
   
-  const { id: editId, ...editValues } = cabinToEdit;
+  const { id: editId, ...editValues } = cabinToEdit ?? {};
   
-  const isEditSession: boolean = editId ? true : false;
   
-  const queryClient = useQueryClient();
+  const isEditSession: boolean = Boolean(editId);
   
+
   const { register, handleSubmit, reset, getValues, formState } = useForm<CabinFormValues>({
-    defaultValues: isEditSession ? editValues : {} , 
+    defaultValues: isEditSession ? editValues : {}, 
   });
   
+      const { mutate, isPending } = useCreateUpdateCabin(editId , reset);
   
+   const { errors } = formState;
+
   
-  const { errors }  = formState;
-  
-  const { mutate, isPending } = useMutation({
-    
-    mutationFn: createEditCabin,
-    
-    onSuccess: () => {
-      
-      if (editId) {
-        toast.success("Cabin updated Successfully");
-      }
-      else {
-        toast.success("Cabin created Successfully");
-      }
-      
-      
-      queryClient.invalidateQueries({
-        queryKey: ['cabins']
-      });
-      reset();
-    },
-    onError: (err) => {
-      
-      toast.error(err.message);
-    },
-  })
-  
-  
+
   
   const onSubmit = (data: CabinFormValues): void => {
-    
     
     // string -> image already exists 
     // FileList contains multiple files 
     
     const image: string | File = typeof data.image === "string" ? data.image : data.image[0]
-      ?? cabinToEdit.image 
+      ?? cabinToEdit?.image 
       ;
     
     mutate({
       newCabin: { ...data, image }, 
       id: editId 
     });
-    
     
     
   }
@@ -88,7 +61,7 @@ const CabinForm: React.FC<CabinFormProps> = ({ cabinToEdit = {} }) => {
         <Input disabled={isPending} type="number" id="maxCapacity" {...register("maxCapacity",
           {
             required: "This field is required",
-            min: { value: 1, message: "Capacity should be at least 1" }
+            min: { value: 1, message: "Capacity should be at least 1" },
           })} />
       </FormRow>
 
@@ -98,16 +71,15 @@ const CabinForm: React.FC<CabinFormProps> = ({ cabinToEdit = {} }) => {
       </FormRow>
 
       <FormRow id="discount" label="Discount" error={errors.discount?.message} >
-        <Input disabled={isPending} type="number" id="discount" {...register("discount",
-          {
-            required: "This field is required", 
-            validate : (value) =>  value <= getValues().regularPrice || "Discount should be less than the regular Price"
+        <Input defaultValue={0} disabled={isPending} type="number" id="discount" {...register("discount",
+          { 
+            validate : (value) =>  Number(value) <= Number(getValues().regularPrice) || "Discount should be less than the regular Price"
           }
         )} />
       </FormRow>
 
       <FormRow id="description" label="Description">
-        <Textarea disabled={isPending}  id="description" defaultValue="" {...register("description")}/>
+        <Textarea   id="description" defaultValue="" {...register("description")}/>
       </FormRow>
 
       <FormRow id="image" label="Image">

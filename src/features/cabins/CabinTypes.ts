@@ -25,5 +25,5 @@ export interface CabinRowProps {
 }
 
 export interface CabinFormProps {
-  cabinToEdit?: Cabin | never;
+  cabinToEdit?: Cabin;
 }
