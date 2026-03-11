@@ -1,6 +1,6 @@
 
 //DB
- interface Cabin {
+ export interface Cabin {
   id: number;
   name: string;
   maxCapacity: number;
