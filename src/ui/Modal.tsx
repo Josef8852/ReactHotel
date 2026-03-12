@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import type { ModalProps } from "./UITypes";
+import type { ModalCompound, ModalContextProps, OpenProps, WindowProps } from "./UITypes";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
+import { cloneElement, createContext, useContext } from "react";
+import { useState } from "react";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -52,20 +54,56 @@ const Button = styled.button`
   }
 `;
 
+const ModalContext = createContext<ModalContextProps>({
+  openName: "" , 
+  close: () => {}, 
+  open: () => {},
+});
 
-const Modal:React.FC<ModalProps> = ({children , setOpenModal}) => {
+const Modal : ModalCompound = ({ children }) => {
   
+  const [openName, setOpenName] = useState<string>("");
+  
+  const close = () => setOpenName("");
+  
+  const open = setOpenName;
+  
+  return <ModalContext.Provider value={{
+    openName,
+    close ,
+    open ,
+  }
+  }
+  > {children}</ModalContext.Provider>
+}
+
+
+const Open: React.FC<OpenProps> = ({ children, opens:opensWindowName }) => {
+  
+  const { open } = useContext(ModalContext);
+  
+  return cloneElement(children, {
+    onClick: () => open(opensWindowName),
+  }); 
+}
+
+
+const Window:React.FC<WindowProps> = ({children  ,name}) => {
+
+  const { openName, close } = useContext(ModalContext);
+  
+  if (name !== openName) return null;
   
   // React Portal -> Render Anywhere (Modal stays in the Component Tree)
   
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={() => setOpenModal!(false)} >
+        <Button onClick={close} >
           <HiXMark />
         </Button>
       <div>
-           {children}
+           {cloneElement(children , {onCloseModal: close})}
       </div>
       </StyledModal>
     </Overlay>,
@@ -73,5 +111,8 @@ const Modal:React.FC<ModalProps> = ({children , setOpenModal}) => {
   )
   
 }
+
+Modal.Open = Open; 
+Modal.Window = Window;
 
 export default Modal; 

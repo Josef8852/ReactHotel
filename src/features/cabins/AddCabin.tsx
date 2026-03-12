@@ -1,22 +1,32 @@
-import { useState } from "react";
 import Button from "../../ui/Button";
 import CabinForm from "./CabinForm";
 import  Modal from "../../ui/Modal";
+import CabinTable from "./CabinTable";
 
 
 const AddCabin: React.FC = () => {
   
-  
-    const [openModal, setOpenModal] = useState<boolean>(false);
-  
   return (
-    <div>
-    <Button size="medium" variant="primary" onClick={() => setOpenModal(!openModal)}>Add new Cabin</Button>
-      {openModal ? <Modal setOpenModal = {setOpenModal}><CabinForm setOpenModal = {setOpenModal}/></Modal> : null}
-    </div>
+    <Modal>
+      <Modal.Open opens="cabin-form">
+        <Button variant="primary" size="medium">Add new cabin</Button>
+      </Modal.Open>
+      <Modal.Window name="cabin-form">
+        <CabinForm/>
+      </Modal.Window>
+      
+     <Modal.Open opens="table">
+        <Button  variant="primary" size="medium">Show Table</Button>
+      </Modal.Open>
+      <Modal.Window name="table">
+        <CabinTable/>
+      </Modal.Window>
+    </Modal>
   )
   
+  
 }
+
 
 
 export default AddCabin; 

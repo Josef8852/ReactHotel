@@ -12,7 +12,7 @@ import Error from "../../ui/Error";
 
 
 
-const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , setOpenModal}) => {
+const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , onCloseModal}) => {
   
   const { id: editId, ...editValues } = cabinToEdit ?? {};
   
@@ -45,14 +45,14 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , setOpenModal}) => {
       id: editId 
     });
     
-    setOpenModal?.(false);
+    onCloseModal?.(false);
     
   }
   
  
   
   return (
-    <Form type={setOpenModal ? "modal" : "regular"} onSubmit={handleSubmit(onSubmit)} >
+    <Form type={onCloseModal ? "modal" : "regular"} onSubmit={handleSubmit(onSubmit)} >
       <FormRow id="name" label="Name" error={errors.name?.message} >
         <Input disabled={isPending} type="text" id="name" {...register("name",
           { required: "Required" })} />
@@ -90,7 +90,7 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , setOpenModal}) => {
       </FormRow>
 
       <FormRow>
-        <Button onClick={() => setOpenModal?.(false)}  size="small" variant="secondary" type="reset">
+        <Button onClick={() => onCloseModal?.(false)}  size="small" variant="secondary" type="reset">
           Cancel
         </Button>
         <Button size="small" variant="primary" disabled={isPending}>

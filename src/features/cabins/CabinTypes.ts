@@ -26,5 +26,5 @@ export interface CabinRowProps {
 
 export interface CabinFormProps {
   cabinToEdit?: Cabin;
-  setOpenModal?: (state:boolean) => void;
+  onCloseModal?: (state:boolean) => void;
 }
