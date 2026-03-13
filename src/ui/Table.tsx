@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import type {  BodyTableProps, HeaderTableProps, RowTableprops, TableCommonRow, TableCompound, TableContextTypes } from "./UITypes";
+import type {
+  BodyTableProps,
+  HeaderTableProps,
+  RowTableprops,
+  TableCommonRow,
+  TableCompound,
+  TableContextTypes
+} from "./UITypes";
+
 import { createContext, useContext } from "react";
 
 const StyledTable = styled.div`
@@ -108,9 +116,16 @@ const Row: React.FC<RowTableprops> = ({children}) => {
   
 }
 
-const Body: React.FC<BodyTableProps> = ({children}) => {
+const Body: React.FC<BodyTableProps> = ({data , render}) => {
   
- 
+   if(!data.length) return <Empty>No data to show at the moment</Empty>
+  
+
+  return (
+    <StyledBody>
+      {data.map(render)}
+   </StyledBody>
+ )
   
 }
 

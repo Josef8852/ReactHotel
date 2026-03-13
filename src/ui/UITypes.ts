@@ -1,4 +1,5 @@
-import type { ReactNode ,ReactElement, ComponentType, HTMLAttributes } from "react";
+import type { ReactNode ,ReactElement} from "react";
+import type { Cabin } from "../features/cabins/CabinTypes";
 
 
 
@@ -80,7 +81,8 @@ export interface HeaderTableProps {
 }
 
 export interface BodyTableProps {
-  children: ReactNode;
+  data: Array<Cabin>
+  render: (cabin: Cabin) => ReactNode;
 }
 
 

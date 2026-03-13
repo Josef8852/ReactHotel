@@ -53,7 +53,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   
   return (
     <>
-    <Table.Row role="row">
+    <Table.Row>
       <Img src={cabin.image} />
       <Cabin>{cabin.name}</Cabin>
       <div>Fits up to {cabin.maxCapacity}</div>
