@@ -9,18 +9,8 @@ import Button from "../../ui/Button";
 import  CabinForm from "./CabinForm";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Table from "../../ui/Table";
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
 
 const Img = styled.img`
   display: block;
@@ -63,7 +53,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   
   return (
     <>
-    <TableRow role="row">
+    <Table.Row role="row">
       <Img src={cabin.image} />
       <Cabin>{cabin.name}</Cabin>
       <div>Fits up to {cabin.maxCapacity}</div>
@@ -93,7 +83,7 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
           </Modal>
           
       </Container>
-    </TableRow>
+    </Table.Row>
     </>
   )
   

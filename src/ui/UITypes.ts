@@ -1,4 +1,6 @@
-import type { ReactNode ,ReactElement } from "react";
+import type { ReactNode ,ReactElement, ComponentType, HTMLAttributes } from "react";
+
+
 
  export interface RowProps {
   variant?: "horizontal" | "vertical";
@@ -8,6 +10,8 @@ export interface ButtonProps {
   size?: "small" | "medium" | "large";
   variant?: "primary" | "secondary" | "danger";
 }
+
+
  
 export interface FormRowProps {
   label?: string; 
@@ -51,10 +55,54 @@ export interface ModalContextProps {
   open: (state: string) => void; 
 }
 
+////////////////////////
 
 export interface ConfirmDeleteProps {
   resourceName: string; 
   onConfirm: () => void; 
   disabled: boolean;
-  onCloseModal: (state: boolean) => void;
+  onCloseModal?: (state: boolean) => void; // Comes from cloning inside Modal.Window
+}
+
+
+// Table Compount Component
+
+export interface TableCommonRow {
+  columns: string;
+}
+
+export interface RowTableprops {
+  children: ReactNode;
+}
+
+export interface HeaderTableProps {
+    children: ReactNode;
+}
+
+export interface BodyTableProps {
+  children: ReactNode;
+}
+
+
+interface FooterProps {
+  children: ReactNode;
+}
+
+interface TableProps {
+  columns: string;
+  children: ReactNode;
+}
+
+
+
+
+export interface TableCompound extends React.FC<TableProps> {
+  Header: React.FC<HeaderTableProps>;
+  Row: React.FC<RowTableprops>;
+  Body: React.FC<BodyTableProps>;
+  Footer: React.FC<FooterProps>;
+}
+
+export interface TableContextTypes {
+  columns: string;
 }

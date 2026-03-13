@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import type {  BodyTableProps, HeaderTableProps, RowTableprops, TableCommonRow, TableCompound, TableContextTypes } from "./UITypes";
+import { createContext, useContext } from "react";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -9,7 +11,7 @@ const StyledTable = styled.div`
   overflow: hidden;
 `;
 
-const CommonRow = styled.div`
+const CommonRow = styled.div<TableCommonRow>`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
   column-gap: 2.4rem;
@@ -58,3 +60,65 @@ const Empty = styled.p`
   text-align: center;
   margin: 2.4rem;
 `;
+
+
+const TableContext = createContext<TableContextTypes>({
+  columns : "",
+});
+
+const Table: TableCompound = ({columns ,children}) => {
+  
+  
+  return (
+    
+    <TableContext.Provider value={{
+      columns , 
+    }}>
+      <StyledTable role="table">
+        {children}
+      </StyledTable>
+    </TableContext.Provider>
+  )
+  
+  
+}
+
+const Header: React.FC<HeaderTableProps> = ({ children }) => {
+  
+  const { columns } = useContext(TableContext);
+  
+  return (
+    <StyledHeader role="row" columns={columns}>
+      {children}
+    </StyledHeader>
+  )
+  
+}
+
+
+const Row: React.FC<RowTableprops> = ({children}) => {
+  
+  const { columns } = useContext(TableContext);
+  
+  return (
+    <StyledRow role="row" columns={columns}>
+      {children}
+    </StyledRow>
+  )
+  
+}
+
+const Body: React.FC<BodyTableProps> = ({children}) => {
+  
+ 
+  
+}
+
+
+Table.Header = Header; 
+Table.Row = Row; 
+Table.Body = Body;
+Table.Footer = Footer;
+
+
+export default Table; 
