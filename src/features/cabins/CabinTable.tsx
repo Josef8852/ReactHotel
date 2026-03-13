@@ -3,6 +3,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
 import type { Cabin } from "./CabinTypes";
+import Menus from "../../ui/Menus";
 
 
 
@@ -14,6 +15,7 @@ const CabinTable: React.FC = () => {
   if(isLoading) return <Spinner/>
   
   return (
+    <Menus>
     <Table  columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
       <Table.Header>
         <div></div>
@@ -24,7 +26,8 @@ const CabinTable: React.FC = () => {
         <div></div>
       </Table.Header>
       <Table.Body render={(cabin : Cabin) => <CabinRow cabin={cabin} key={cabin.id} /> } data={cabins!} />
-    </Table>
+      </Table>
+    </Menus>
   )
 }
 

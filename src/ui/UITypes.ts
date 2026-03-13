@@ -1,4 +1,4 @@
-import type { ReactNode ,ReactElement} from "react";
+import type { ReactNode ,ReactElement, SetStateAction, Dispatch} from "react";
 import type { Cabin } from "../features/cabins/CabinTypes";
 
 
@@ -66,7 +66,7 @@ export interface ConfirmDeleteProps {
 }
 
 
-// Table Compount Component
+// Table Compound Component
 
 export interface TableCommonRow {
   columns: string;
@@ -96,8 +96,6 @@ interface TableProps {
 }
 
 
-
-
 export interface TableCompound extends React.FC<TableProps> {
   Header: React.FC<HeaderTableProps>;
   Row: React.FC<RowTableprops>;
@@ -107,4 +105,55 @@ export interface TableCompound extends React.FC<TableProps> {
 
 export interface TableContextTypes {
   columns: string;
+}
+
+// Menus Compound Component
+
+
+
+export interface MenusProps {
+  children: ReactNode;
+}
+
+ interface MenuProps {
+  children: ReactNode;
+}
+
+export interface ToggleProps {
+  id: number;
+}
+
+
+
+export interface ListProps {
+  children: ReactNode;
+  id: number; 
+}
+
+type Position = {
+  x: number;
+  y: number;
+}
+
+export interface StyledListProps {
+  position: Position | null;
+}
+
+export interface MenuButtonProps {
+  children: ReactNode;
+}
+
+export interface MenusCompound extends React.FC<MenusProps> {
+  Menu: React.FC<MenuProps>;
+  Toggle: React.FC<ToggleProps>;
+  List: React.FC<ListProps>
+  MenuButton : React.FC<MenuButtonProps>
+}
+
+
+export interface MenusContextTypes extends StyledListProps {
+  openId: number | null;
+  close: () => void;
+  open: Dispatch<SetStateAction<number | null>>
+  setPosition : Dispatch<SetStateAction<Position | null>>
 }

@@ -5,11 +5,11 @@ import { HiTrash } from "react-icons/hi2";
 import { HiPencil } from "react-icons/hi";
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
-import Button from "../../ui/Button";
 import  CabinForm from "./CabinForm";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
+import Menus  from "../../ui/Menus";
 
 
 const Img = styled.img`
@@ -63,24 +63,46 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
           
             
           <Modal>
-            <Modal.Open opens="cabin-form-edit">
-              <Button  variant="primary" size="medium"><HiPencil /></Button>
-            </Modal.Open>
+            
+            <Menus.Menu>
+              
+              <Menus.Toggle id={cabin.id} />
+              
+              
+              <Menus.List id={cabin.id}>
+                
+              <Modal.Open opens="confirm-delete">
+                      <Menus.MenuButton><HiTrash /> Delete</Menus.MenuButton>
+                </Modal.Open>
+                
+              <Modal.Open opens="cabin-form-edit">
+                <Menus.MenuButton><HiPencil />Edit</Menus.MenuButton>
+                </Modal.Open>
+                
+              </Menus.List>
+              
+              
+            </Menus.Menu>
+            
+         
             <Modal.Window name="cabin-form-edit">
               <CabinForm cabinToEdit={cabin}/>
             </Modal.Window>
-          </Modal>
+  
           
-          
-          <Modal>
-            <Modal.Open opens="confirm-delete">
-                    <Button size="medium" variant="primary"><HiTrash /></Button>
-            </Modal.Open>
+        
+        
             <Modal.Window name="confirm-delete">
               <ConfirmDelete onConfirm={() => mutate(cabin.id)} disabled={isPending}
                 resourceName={cabin.name} />
             </Modal.Window>
+            
+            
           </Modal>
+          
+         
+           
+        
           
       </Container>
     </Table.Row>

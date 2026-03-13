@@ -1,10 +1,10 @@
 import { useRef , useEffect } from "react";
-import type { useClickType } from "./hooksTypes";
+import type { Handler, useClickType } from "./hooksTypes";
 
 
-export const useClickOutside : useClickType = (handler) => {
+export const useClickOutside : useClickType = <T extends HTMLElement>(handler : Handler) => {
   
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<T | null>(null);
 
   useEffect(() => {
     

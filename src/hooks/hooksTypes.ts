@@ -1,6 +1,11 @@
 import type { RefObject } from "react";
 
 
-type handler = () => void; 
+export type Handler = () => void; 
 
-export type useClickType = (handler: handler) => {ref :  RefObject<HTMLDivElement | null>};
+
+// Generic type by default its a div but we can pass any Html eleemnt to use the hook 
+
+export type useClickType = <T extends HTMLElement>(
+  handler: Handler
+) => { ref: RefObject<T | null> };
