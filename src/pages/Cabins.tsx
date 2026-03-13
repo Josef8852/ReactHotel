@@ -10,7 +10,6 @@ const Cabins: React.FC = () => {
     <>
     <Row variant="horizontal">
       <Heading as="h1">All cabins</Heading>
-      <p>TEST</p>
     </Row>
     
     <Row variant="vertical">

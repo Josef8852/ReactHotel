@@ -1,12 +1,14 @@
-import styled from "styled-components";
 import type { CabinRowProps } from "./CabinTypes";
 import { formatCurrency } from "../../utils/helpers";
+import { useDeleteCabin } from "./useDeleteCabin";
+import { HiTrash } from "react-icons/hi2";
+import { HiPencil } from "react-icons/hi";
+import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import Button from "../../ui/Button";
-import { useState } from "react";
 import  CabinForm from "./CabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
-
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -53,8 +55,7 @@ const Container = styled.div`
   `
 
 const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
-  
-  const [showForm, setShowForm] = useState<boolean>(false);
+
   
   const { isPending, mutate } = useDeleteCabin();
   
@@ -68,12 +69,31 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
       <div>Fits up to {cabin.maxCapacity}</div>
       <Price>{formatCurrency(cabin.regularPrice)}</Price>
       {cabin.discount ?  <Discount>{formatCurrency(cabin.discount)}</Discount> : <span>&mdash;</span>}
-      <Container> 
-        <Button size="small" variant="primary" disabled={isPending} onClick={() => mutate(cabin.id)}>Delete</Button>
-        <Button onClick={() => setShowForm(!showForm)} variant="primary" size="small">Edit</Button>
+        <Container> 
+          
+            
+          <Modal>
+            <Modal.Open opens="cabin-form-edit">
+              <Button  variant="primary" size="medium"><HiPencil /></Button>
+            </Modal.Open>
+            <Modal.Window name="cabin-form-edit">
+              <CabinForm cabinToEdit={cabin}/>
+            </Modal.Window>
+          </Modal>
+          
+          
+          <Modal>
+            <Modal.Open opens="confirm-delete">
+                    <Button size="medium" variant="primary"><HiTrash /></Button>
+            </Modal.Open>
+            <Modal.Window name="confirm-delete">
+              <ConfirmDelete onConfirm={() => mutate(cabin.id)} disabled={isPending}
+                resourceName={cabin.name} />
+            </Modal.Window>
+          </Modal>
+          
       </Container>
     </TableRow>
-      {showForm ? <CabinForm cabinToEdit={cabin} /> : null }
     </>
   )
   

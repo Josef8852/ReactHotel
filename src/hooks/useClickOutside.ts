@@ -11,7 +11,7 @@ export const useClickOutside : useClickType = (handler) => {
   const handleClick = (e: Event) => {
     // if outside Modal -> close 
     if (ref.current && !ref.current.contains(e.target as Node)) {
-      close();
+      handler();
     }
   }
   

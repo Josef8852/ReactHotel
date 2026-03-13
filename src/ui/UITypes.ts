@@ -50,3 +50,11 @@ export interface ModalContextProps {
   close: () => void;  
   open: (state: string) => void; 
 }
+
+
+export interface ConfirmDeleteProps {
+  resourceName: string; 
+  onConfirm: () => void; 
+  disabled: boolean;
+  onCloseModal: (state: boolean) => void;
+}
