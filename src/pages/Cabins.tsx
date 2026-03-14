@@ -2,6 +2,7 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import CabinTable from "../features/cabins/CabinTable";
 import AddCabin from "../features/cabins/AddCabin";
+import CabinTableOperations from "../features/cabins/CabinTableOperations";
 
 const Cabins: React.FC = () => {
   
@@ -9,7 +10,8 @@ const Cabins: React.FC = () => {
   return (
     <>
     <Row variant="horizontal">
-      <Heading as="h1">All cabins</Heading>
+        <Heading as="h1">All cabins</Heading>
+        <CabinTableOperations/>
     </Row>
     
     <Row variant="vertical">
