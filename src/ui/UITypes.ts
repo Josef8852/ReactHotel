@@ -160,5 +160,31 @@ export interface MenusContextTypes extends StyledListProps {
 
 ////////////////////////
 
+export type SortOptionsObj = {
+  value:
+    "" |
+  "name-asc" |
+  "name-desc" |
+  "regularPrice-asc" |
+  "regularPrice-desc" |
+  "maxCapacity-asc" |
+  "maxCapacity-desc" ;
+  
+  label:
+  "Sort by name (A-Z)" |
+  "Sort by name (Z-A)" |
+  "Sort by price (low frist)" |
+  "Sort by price (high frist)" |
+  "Sort by capacity (high frist)" |
+  "Sort by capacity (low frist)";
+}
 
+export interface SortByProps {
+  options : Array<SortOptionsObj>
+}
 
+export interface SelectProps extends SortByProps {
+  value: SortOptionsObj["value"];
+  type: "white";
+  onChange: (e:React.ChangeEvent<HTMLSelectElement>) => void;
+}

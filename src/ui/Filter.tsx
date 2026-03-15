@@ -51,9 +51,9 @@ const Filter: React.FC = () => {
   
   return (
     <StyledFilter>
-      <FilterButton active={currentFilter === "all"} onClick={() => handleClick("all")}>All</FilterButton>
-      <FilterButton active={currentFilter === "no-discount"} onClick={() => handleClick("no-discount")}>No discount</FilterButton>
-      <FilterButton active={currentFilter === "with-discount"} onClick={() => handleClick("with-discount")}>With Discount</FilterButton>
+      <FilterButton disabled={currentFilter === "all"} active={currentFilter === "all"} onClick={() => handleClick("all")}>All</FilterButton>
+      <FilterButton disabled={currentFilter === "no-discount"} active={currentFilter === "no-discount"} onClick={() => handleClick("no-discount")}>No discount</FilterButton>
+      <FilterButton disabled={currentFilter === "with-discount"} active={currentFilter === "with-discount"} onClick={() => handleClick("with-discount")}>With Discount</FilterButton>
       
     </StyledFilter>
   )

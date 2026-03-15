@@ -6,6 +6,8 @@ import type { Cabin } from "./CabinTypes";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import useFilterCabins from "./useFilterCabins";
+import useSortCabins from "./useSortCabins";
+import type { SortOptionsObj } from "../../ui/UITypes";
 
 
 
@@ -20,6 +22,10 @@ const CabinTable: React.FC = () => {
   
   const filteredCabins: Cabin[] = useFilterCabins(filterValue, cabins!);
   
+  const sortValue  = searchParams.get("sortBy") as SortOptionsObj["value"];
+  
+  const sortedCabins: Cabin[] = useSortCabins(sortValue , filteredCabins!);
+  
   if (isLoading) return <Spinner />
   
   
@@ -31,11 +37,11 @@ const CabinTable: React.FC = () => {
         <div></div>
         <div>Cabin</div>
         <div>Capacity</div>
-        <div>Price</div>
+        <div>Price</div> 
         <div>Discount</div>
         <div></div>
       </Table.Header>
-      <Table.Body render={(cabin : Cabin) => <CabinRow cabin={cabin} key={cabin.id} /> } data={filteredCabins} />
+      <Table.Body render={(cabin : Cabin) => <CabinRow cabin={cabin} key={cabin.id} /> } data={sortedCabins} />
       </Table>
     </Menus>
   )

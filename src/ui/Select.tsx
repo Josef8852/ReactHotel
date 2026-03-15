@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import type { SelectProps } from "./UITypes";
 
-const StyledSelect = styled.select`
+const StyledSelect = styled.select<{type? : "white"}>`
   font-size: 1.4rem;
   padding: 0.8rem 1.2rem;
   border: 1px solid
@@ -13,3 +14,15 @@ const StyledSelect = styled.select`
   font-weight: 500;
   box-shadow: var(--shadow-sm);
 `;
+
+const Select: React.FC<SelectProps> = ({ options, value, type, onChange }) => {
+  
+  return (
+    <StyledSelect type={type} value={value} onChange={onChange}>
+      {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+    </StyledSelect>
+  )
+  
+}
+
+export default Select;
