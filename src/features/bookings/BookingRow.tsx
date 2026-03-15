@@ -4,6 +4,7 @@ import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
+import type { BookingRowProps } from "./bookingsTypes";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -32,7 +33,7 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-const  BookingRow:React.FC = ({
+const  BookingRow:React.FC<BookingRowProps> = ({
   booking: {
     id: bookingId,
     created_at,

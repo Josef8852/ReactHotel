@@ -116,7 +116,9 @@ const Row: React.FC<RowTableprops> = ({children}) => {
   
 }
 
-const Body: React.FC<BodyTableProps> = ({data , render}) => {
+
+// Depends on data so we make it generic to be reusable with Booking , Cabins , etc 
+const Body = <T,>({data , render} : BodyTableProps<T>) => {
   
    if(!data.length) return <Empty>No data to show at the moment</Empty>
   

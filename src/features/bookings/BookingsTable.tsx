@@ -4,6 +4,7 @@ import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
+import type { Booking } from "./bookingsTypes";
 
 const BookingsTable: React.FC = () => {
   
@@ -26,7 +27,7 @@ const BookingsTable: React.FC = () => {
           <div></div>
         </Table.Header>
 
-        <Table.Body
+        <Table.Body<Booking>
           data={bookings}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />

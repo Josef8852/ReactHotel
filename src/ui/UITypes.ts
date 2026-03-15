@@ -1,6 +1,5 @@
 import type { ReactNode ,ReactElement, SetStateAction, Dispatch} from "react";
-import type { Cabin } from "../features/cabins/CabinsTypes";
-import type { Booking } from "../features/bookings/bookingsTypes";
+
 
 
 
@@ -81,9 +80,9 @@ export interface HeaderTableProps {
     children: ReactNode;
 }
 
-export interface BodyTableProps {
-  data: Array<Cabin> | Array<Booking>
-  render: (cabin: Cabin) => ReactNode;
+export interface BodyTableProps<T> {
+  data: T[];
+  render: (item: T) => ReactNode;
 }
 
 
@@ -100,7 +99,7 @@ interface TableProps {
 export interface TableCompound extends React.FC<TableProps> {
   Header: React.FC<HeaderTableProps>;
   Row: React.FC<RowTableprops>;
-  Body: React.FC<BodyTableProps>;
+  Body: <T>(props: BodyTableProps<T>) => ReactNode;
   Footer: React.FC<FooterProps>;
 }
 
