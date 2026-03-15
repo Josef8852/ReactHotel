@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import useFilterCabins from "./useFilterCabins";
 import useSortCabins from "./useSortCabins";
 import type { SortOptionsObj } from "../../ui/UITypes";
+import Empty from "../../ui/Empty";
 
 
 
@@ -22,12 +23,13 @@ const CabinTable: React.FC = () => {
   
   const filteredCabins: Cabin[] = useFilterCabins(filterValue, cabins!);
   
-  const sortValue  = searchParams.get("sortBy") as SortOptionsObj["value"];
+  const sortValue  = (searchParams.get("sortBy") || "" ) as SortOptionsObj["value"];
   
   const sortedCabins: Cabin[] = useSortCabins(sortValue , filteredCabins!);
   
   if (isLoading) return <Spinner />
   
+  if(!cabins?.length) return <Empty  resourceName="cabins" />
   
   
   return (

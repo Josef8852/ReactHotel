@@ -15,7 +15,7 @@ const CabinTableOperations:React.FC = () => {
         { value: "regularPrice-asc", label: "Sort by price (low frist)" },
         { value: "regularPrice-desc", label: "Sort by price (high frist)" }, 
         { value: "maxCapacity-asc", label: "Sort by capacity (low frist)" },
-        { value:"maxCapacity-desc" , label:"Sort by price (high frist)"}
+        { value:"maxCapacity-desc" , label:"Sort by capacity (high frist)"}
       ]} />
     </TableOperations>
   )

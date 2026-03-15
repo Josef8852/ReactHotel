@@ -1,5 +1,6 @@
 import type { ReactNode ,ReactElement, SetStateAction, Dispatch} from "react";
 import type { Cabin } from "../features/cabins/CabinsTypes";
+import type { Booking } from "../features/bookings/bookingsTypes";
 
 
 
@@ -81,7 +82,7 @@ export interface HeaderTableProps {
 }
 
 export interface BodyTableProps {
-  data: Array<Cabin>
+  data: Array<Cabin> | Array<Booking>
   render: (cabin: Cabin) => ReactNode;
 }
 
@@ -187,4 +188,8 @@ export interface SelectProps extends SortByProps {
   value: SortOptionsObj["value"];
   type: "white";
   onChange: (e:React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface EmptyProps {
+  resourceName: string;
 }

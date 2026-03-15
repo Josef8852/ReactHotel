@@ -3,11 +3,11 @@ import type { Cabin } from "./CabinsTypes";
 
 
 
-const useSortCabins = (value: SortOptionsObj["value"], cabinsToSort: Cabin[]) : Cabin[] => {
+const useSortCabins = (value: SortOptionsObj["value"], cabinsToSort: Cabin[] = []) : Cabin[] => {
   
   const [field, direction] = value.split("-") as [keyof Cabin , "asc" | "desc"];
   
-
+  
   
   const modifier: number = direction === "asc" ? 1 : -1;
   

@@ -1,5 +1,8 @@
-const Empty:React.FC = ({ resource }) => {
-  return <p>No {resource} could be found.</p>;
+import type { EmptyProps } from "./UITypes";
+
+
+const Empty: React.FC<EmptyProps> = ({ resourceName }) => {
+  return <p>No {resourceName} could be found.</p>;
 }
 
 export default Empty;
