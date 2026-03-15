@@ -1,4 +1,4 @@
-import { type Cabin } from "./CabinTypes";
+import { type Cabin } from "./CabinsTypes";
 
 
 

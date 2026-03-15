@@ -2,7 +2,7 @@ import { useCabins } from "./useCabins";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
-import type { Cabin } from "./CabinTypes";
+import type { Cabin } from "./CabinsTypes";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import useFilterCabins from "./useFilterCabins";

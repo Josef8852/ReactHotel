@@ -1,5 +1,5 @@
 import type { ReactNode ,ReactElement, SetStateAction, Dispatch} from "react";
-import type { Cabin } from "../features/cabins/CabinTypes";
+import type { Cabin } from "../features/cabins/CabinsTypes";
 
 
 

@@ -1,4 +1,4 @@
-import type { NewCabin } from "../features/cabins/CabinTypes"
+import type { NewCabin } from "../features/cabins/CabinsTypes"
 
 export type CreateEditCabinArgs = {
   newCabin: NewCabin; 

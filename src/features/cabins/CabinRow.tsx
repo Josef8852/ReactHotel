@@ -1,4 +1,4 @@
-import type { CabinRowProps } from "./CabinTypes";
+import type { CabinRowProps } from "./CabinsTypes";
 import { formatCurrency } from "../../utils/helpers";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { HiTrash } from "react-icons/hi2";

@@ -1,5 +1,5 @@
 import type { SortOptionsObj } from "../../ui/UITypes";
-import type { Cabin } from "./CabinTypes";
+import type { Cabin } from "./CabinsTypes";
 
 
 

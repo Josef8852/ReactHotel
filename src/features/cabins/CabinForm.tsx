@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form"
-import type { CabinFormProps, CabinFormValues } from "./CabinTypes";
+import type { CabinFormProps, CabinFormValues } from "./CabinsTypes";
 import { useCreateUpdateCabin } from "./useCreateUpdateCabin";
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
