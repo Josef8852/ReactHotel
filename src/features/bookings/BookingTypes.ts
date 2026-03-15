@@ -1,7 +1,9 @@
 import type { Cabin } from "../cabins/CabinsTypes";
+import type { Guest } from "../guests/GuestsTypes";
 
 // DB
 export interface Booking {
+  id: number;
   created_at: Date; 
   startDate: Date; 
   endDate: Date; 
@@ -10,12 +12,14 @@ export interface Booking {
   cabinPrice: number; 
   extrasPrice: number; 
   totalPrice: number;
-  status: "confirmed" | "unconfirmed";
+  status:  "unconfirmed" | "checked_in" | "checked_out";
   hasBreakfast: boolean; 
   isPaid: boolean; 
   observasions: string; 
-  cabinId: Cabin["id"];
-  guestId: number;
+  cabins: Cabin;
+  guests: Guest;
+  cabinID: number; 
+  guestID: number;
 }
 
 export interface BookingRowProps {

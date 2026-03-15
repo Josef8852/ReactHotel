@@ -1,11 +1,11 @@
-import type { Booking } from "../features/bookings/bookingsTypes";
+import type { Booking } from "../features/bookings/BookingTypes";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
 
 export const getBookings = async () => {
   
-  const { data, error } = await supabase.from("bookings").select("*");
+  const { data, error } = await supabase.from("bookings").select("*,cabins(name),guests(fullName,email)");
   
   if (error) {
     console.error(error);

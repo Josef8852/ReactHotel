@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import type { Tagtype } from "./UITypes";
 
-const Tag = styled.span`
+const Tag = styled.span<Tagtype>`
   width: fit-content;
   text-transform: uppercase;
   font-size: 1.1rem;

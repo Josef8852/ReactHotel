@@ -4,7 +4,8 @@ import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
-import type { BookingRowProps } from "./bookingsTypes";
+import type { BookingRowProps } from "./BookingTypes";
+import type { Tagtype } from "../../ui/UITypes";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -43,22 +44,25 @@ const  BookingRow:React.FC<BookingRowProps> = ({
     numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
+    guests : {fullName , email},
+    cabins  : {name}
   },
 }) => {
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+  
+
+  // Record [key, value]
+  const statusToTagName : Record<BookingRowProps["booking"]["status"] ,Tagtype["type"] > = {
+    unconfirmed: "blue", 
+    checked_in: "green", 
+    checked_out : "silver" 
   };
 
   return (
     <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+      <Cabin>{name}</Cabin>
 
       <Stacked>
-        <span>{guestName}</span>
+        <span>{fullName}</span>
         <span>{email}</span>
       </Stacked>
 
@@ -75,7 +79,7 @@ const  BookingRow:React.FC<BookingRowProps> = ({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={statusToTagName[status]}>{status.replace("_", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
     </Table.Row>

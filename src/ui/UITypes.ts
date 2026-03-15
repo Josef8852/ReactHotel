@@ -192,3 +192,7 @@ export interface SelectProps extends SortByProps {
 export interface EmptyProps {
   resourceName: string;
 }
+
+export type Tagtype = {
+  type : "blue" | "green" | "silver" 
+} 

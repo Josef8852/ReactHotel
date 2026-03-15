@@ -4,15 +4,20 @@ import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
-import type { Booking } from "./bookingsTypes";
+import type { Booking } from "./BookingTypes";
 
 const BookingsTable: React.FC = () => {
   
-    const {isLoading , bookings  } = useBookings();
+  const { isLoading, bookings } = useBookings();
 
   if (!bookings?.length) return <Empty resourceName="bookings" />
   
-  if(isLoading) return <Spinner/>
+  if (isLoading) return <Spinner />
+
+  
+
+  
+ console.log(bookings)
   
   
   return (

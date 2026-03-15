@@ -5,8 +5,8 @@ import { differenceInDays } from 'date-fns/fp';
 export const subtractDates = (dateStr1:string | object, dateStr2 : string | object) =>
   differenceInDays(parseISO(String(dateStr1)), parseISO(String(dateStr2)));
 
-export const formatDistanceFromNow = (dateStr:string) =>
-  formatDistance(parseISO(dateStr), new Date(), {
+export const formatDistanceFromNow = (dateStr:Date) =>
+  formatDistance(parseISO(String(dateStr)), new Date(), {
     addSuffix: true,
   })
     .replace('about ', '')
