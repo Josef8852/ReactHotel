@@ -1,5 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
+import type { FilterProps } from "./UITypes";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
@@ -38,23 +39,22 @@ const FilterButton = styled.button<{active?: boolean | null}>`
 `;
 
 
-const Filter: React.FC = () => {
+const Filter: React.FC<FilterProps> = ({filterField , options}) => {
   
   const [searchParams, setSearchParams] = useSearchParams();
   
-  const currentFilter = searchParams.get("discount");
+  const currentFilter = searchParams.get(filterField);
   
   const handleClick = (value : string) : void => {
-    searchParams.set("discount", value);
+    searchParams.set(filterField, value);
     setSearchParams(searchParams);
   }
   
   return (
     <StyledFilter>
-      <FilterButton disabled={currentFilter === "all"} active={currentFilter === "all"} onClick={() => handleClick("all")}>All</FilterButton>
-      <FilterButton disabled={currentFilter === "no-discount"} active={currentFilter === "no-discount"} onClick={() => handleClick("no-discount")}>No discount</FilterButton>
-      <FilterButton disabled={currentFilter === "with-discount"} active={currentFilter === "with-discount"} onClick={() => handleClick("with-discount")}>With Discount</FilterButton>
-      
+      {options.map((option) => <FilterButton disabled={currentFilter === option.value}
+        active={currentFilter === option.value}
+        onClick={() => handleClick(option.value)}>{option.label}</FilterButton>)}
     </StyledFilter>
   )
   

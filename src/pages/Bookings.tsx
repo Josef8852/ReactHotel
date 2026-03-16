@@ -1,4 +1,5 @@
 import BookingsTable from "../features/bookings/BookingsTable";
+import BookingTableOperations from "../features/bookings/BookingTableOperations";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 
@@ -7,7 +8,7 @@ const Bookings:React.FC = () => {
     <>
     <Row variant="horizontal">
       <Heading as="h1">All bookings</Heading>
-      <p>TEST</p>
+      <BookingTableOperations/>
       </Row>
           <BookingsTable/>
     </>

@@ -162,13 +162,18 @@ export interface MenusContextTypes extends StyledListProps {
 
 export type SortOptionsObj = {
   value:
-    "" |
+  "" |
   "name-asc" |
   "name-desc" |
   "regularPrice-asc" |
   "regularPrice-desc" |
   "maxCapacity-asc" |
-  "maxCapacity-desc" ;
+  "maxCapacity-desc" |
+  "startDate-desc" |
+  "startDate-asc" |
+  "totalPrice-desc" |
+  "totalPrice-asc";
+  
   
   label:
   "Sort by name (A-Z)" |
@@ -176,7 +181,36 @@ export type SortOptionsObj = {
   "Sort by price (low frist)" |
   "Sort by price (high frist)" |
   "Sort by capacity (high frist)" |
-  "Sort by capacity (low frist)";
+  "Sort by capacity (low frist)" |
+  "Sort by date (recent first)" |
+  "Sort by date (earlier first)" |
+  "Sort by amount (low first)" |
+  "Sort by amount (high first)";
+  
+}
+
+export type  FilterOptionsObj = {
+  value:
+  "all" |
+  "no-discount" |
+  "with-discount" |
+  "checked-out" |
+  "checked-in" |
+  "unconfirmed";
+  
+  
+  label:
+  "All" |
+  "No discount" |
+  "With Discount" |
+  "Checked out" |
+  "Checked in" |
+  "Unconfirmed"
+}
+
+export interface FilterProps {
+  filterField: string; 
+  options : Array<FilterOptionsObj>
 }
 
 export interface SortByProps {
@@ -196,3 +230,4 @@ export interface EmptyProps {
 export type Tagtype = {
   type : "blue" | "green" | "silver" 
 } 
+

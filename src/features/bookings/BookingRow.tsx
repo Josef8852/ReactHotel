@@ -1,11 +1,11 @@
-import styled from "styled-components";
 import { format, isToday } from "date-fns";
-import Tag from "../../ui/Tag";
-import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import type { BookingRowProps } from "./BookingTypes";
 import type { Tagtype } from "../../ui/UITypes";
+import Tag from "../../ui/Tag";
+import Table from "../../ui/Table";
+import styled from "styled-components";
 
 const Cabin = styled.div`
   font-size: 1.6rem;

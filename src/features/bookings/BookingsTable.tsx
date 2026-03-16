@@ -14,10 +14,7 @@ const BookingsTable: React.FC = () => {
   
   if (isLoading) return <Spinner />
 
-  
 
-  
- console.log(bookings)
   
   
   return (
