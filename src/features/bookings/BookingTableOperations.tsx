@@ -9,8 +9,8 @@ const BookingTableOperations:React.FC = () => {
         filterField="status"
         options={[
           { value: "all", label: "All" },
-          { value: "checked-out", label: "Checked out" },
-          { value: "checked-in", label: "Checked in" },
+          { value: "checked_out", label: "Checked out" },
+          { value: "checked_in", label: "Checked in" },
           { value: "unconfirmed", label: "Unconfirmed" },
         ]}
       />

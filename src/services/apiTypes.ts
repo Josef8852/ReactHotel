@@ -4,3 +4,9 @@ export type CreateEditCabinArgs = {
   newCabin: NewCabin; 
   id?: number; 
 }
+
+export type Filter = {
+  field: string;
+  value: string;
+  method: "eq" | "neq" | "gt" | "gte" | "lt" | "lte";
+} | null;

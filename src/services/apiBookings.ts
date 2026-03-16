@@ -1,11 +1,20 @@
 import type { Booking } from "../features/bookings/BookingTypes";
 import { getToday } from "../utils/helpers";
+import type { Filter } from "./apiTypes";
 import supabase from "./supabase";
 
 
-export const getBookings = async () => {
+export const getBookings = async (filter : Filter) => {
   
-  const { data, error } = await supabase.from("bookings").select("*,cabins(name),guests(fullName,email)");
+  let query =  supabase.from("bookings").select("*,cabins(name),guests(fullName,email)");
+  
+  
+  if (filter) {
+    query = query[filter.method || "eq"].call(query, filter.field, filter.value);
+    // this->query
+  }
+  
+  const { data, error } = await query;
   
   if (error) {
     console.error(error);

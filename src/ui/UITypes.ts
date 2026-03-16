@@ -194,8 +194,8 @@ export type  FilterOptionsObj = {
   "all" |
   "no-discount" |
   "with-discount" |
-  "checked-out" |
-  "checked-in" |
+  "checked_out" |
+  "checked_in" |
   "unconfirmed";
   
   
