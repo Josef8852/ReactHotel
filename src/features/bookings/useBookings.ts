@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getBookings } from "../../services/apiBookings"
 import type { Booking } from "./BookingTypes"
 import { useSearchParams } from "react-router-dom"
-import type { Filter } from "../../services/apiTypes"
+import type { Filter, Sort } from "../../services/apiTypes"
 
 export const useBookings = () => {
   
@@ -17,9 +17,16 @@ export const useBookings = () => {
       method : "eq"
     }
   
+  const sortValue  = searchParams.get("sortBy") || "startDate-desc";
+  
+  const [field, direction] = sortValue.split("-");
+  
+  const sort  :  Sort = { field, direction };
+  
+  
   const {isLoading , data:bookings,error} = useQuery<Booking[]>({
-    queryKey: ['bookings' , filter],
-    queryFn: () =>  getBookings(filter),
+    queryKey: ['bookings' , filter , sort],
+    queryFn: () =>  getBookings(filter , sort),
   })
   
   

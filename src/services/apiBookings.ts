@@ -1,17 +1,21 @@
 import type { Booking } from "../features/bookings/BookingTypes";
 import { getToday } from "../utils/helpers";
-import type { Filter } from "./apiTypes";
+import type { Filter, Sort } from "./apiTypes";
 import supabase from "./supabase";
 
 
-export const getBookings = async (filter : Filter) => {
+export const getBookings = async (filter : Filter , sort : Sort) => {
   
   let query =  supabase.from("bookings").select("*,cabins(name),guests(fullName,email)");
   
   
   if (filter) {
     query = query[filter.method || "eq"].call(query, filter.field, filter.value);
-    // this->query
+    // this->eq
+  }
+  
+  if (sort) {
+    query = query.order(sort.field , {ascending:sort.direction === "asc"});
   }
   
   const { data, error } = await query;

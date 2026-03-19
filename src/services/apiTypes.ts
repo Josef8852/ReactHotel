@@ -10,3 +10,8 @@ export type Filter = {
   value: string;
   method: "eq" | "neq" | "gt" | "gte" | "lt" | "lte";
 } | null;
+
+export type Sort  = {
+  field: string; 
+  direction: string;
+}
