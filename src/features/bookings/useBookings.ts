@@ -1,9 +1,11 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getBookings } from "../../services/apiBookings"
 import { useSearchParams } from "react-router-dom"
 import type { Filter, getBookingsPromise, Sort } from "../../services/apiTypes"
 
 export const useBookings = () => {
+  
+  const queryClient = useQueryClient();
   
   const [searchParams] = useSearchParams();
   
@@ -33,6 +35,12 @@ export const useBookings = () => {
     queryFn: () =>  getBookings(filter , sort , page),
   })
   
+  
+  //PRE-FETCHING better UX
+  queryClient.prefetchQuery({
+    queryKey: ['bookings' , filter , sort , page + 1],
+    queryFn: () =>  getBookings(filter , sort ,page),
+  })
   
   return {isLoading , error , bookings }
   
