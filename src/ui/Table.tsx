@@ -21,7 +21,7 @@ const StyledTable = styled.div`
 
 const CommonRow = styled.div<TableCommonRow>`
   display: grid;
-  grid-template-columns: ${(props) => props.columns};
+  grid-template-columns: ${(props) => props.$columns};
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
@@ -71,16 +71,16 @@ const Empty = styled.p`
 
 
 const TableContext = createContext<TableContextTypes>({
-  columns : "",
+  $columns : "",
 });
 
-const Table: TableCompound = ({columns ,children}) => {
+const Table: TableCompound = ({$columns ,children}) => {
   
   
   return (
     
     <TableContext.Provider value={{
-      columns , 
+      $columns , 
     }}>
       <StyledTable role="table">
         {children}
@@ -93,10 +93,10 @@ const Table: TableCompound = ({columns ,children}) => {
 
 const Header: React.FC<HeaderTableProps> = ({ children }) => {
   
-  const { columns } = useContext(TableContext);
+  const { $columns } = useContext(TableContext);
   
   return (
-    <StyledHeader role="row" columns={columns}>
+    <StyledHeader role="row" $columns={$columns}>
       {children}
     </StyledHeader>
   )
@@ -106,10 +106,10 @@ const Header: React.FC<HeaderTableProps> = ({ children }) => {
 
 const Row: React.FC<RowTableprops> = ({children}) => {
   
-  const { columns } = useContext(TableContext);
+  const { $columns } = useContext(TableContext);
   
   return (
-    <StyledRow role="row" columns={columns}>
+    <StyledRow role="row" $columns={$columns}>
       {children}
     </StyledRow>
   )

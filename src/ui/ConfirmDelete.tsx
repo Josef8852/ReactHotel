@@ -34,10 +34,10 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ resourceName, onConfirm, 
       </p>
 
       <div>
-        <Button onClick={() =>  onCloseModal?.(false)} size="small" variant="secondary" disabled={disabled}>
+        <Button onClick={() =>  onCloseModal?.(false)} $size="small" $variant="secondary" disabled={disabled}>
           Cancel
         </Button>
-        <Button onClick={onConfirm} size="medium" variant="danger" disabled={disabled}>
+        <Button onClick={onConfirm} $size="medium" $variant="danger" disabled={disabled}>
           Delete 
         </Button>
       </div>

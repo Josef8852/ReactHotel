@@ -4,12 +4,12 @@ import type { ReactNode ,ReactElement, SetStateAction, Dispatch} from "react";
 
 
  export interface RowProps {
-  variant?: "horizontal" | "vertical";
+  $variant?: "horizontal" | "vertical";
  }
 
 export interface ButtonProps {
-  size?: "small" | "medium" | "large";
-  variant?: "primary" | "secondary" | "danger";
+  $size?: "small" | "medium" | "large";
+  $variant?: "primary" | "secondary" | "danger";
 }
 
 
@@ -23,7 +23,7 @@ export interface FormRowProps {
 
 
 export interface FormProps {
-  type : "modal" | "regular"
+  $type : "modal" | "regular"
 }
 
 
@@ -69,7 +69,7 @@ export interface ConfirmDeleteProps {
 // Table Compound Component
 
 export interface TableCommonRow {
-  columns: string;
+  $columns: string;
 }
 
 export interface RowTableprops {
@@ -91,7 +91,7 @@ interface FooterProps {
 }
 
 interface TableProps {
-  columns: string;
+  $columns: string;
   children: ReactNode;
 }
 
@@ -104,7 +104,7 @@ export interface TableCompound extends React.FC<TableProps> {
 }
 
 export interface TableContextTypes {
-  columns: string;
+  $columns: string;
 }
 
 // Menus Compound Component
@@ -228,7 +228,7 @@ export interface EmptyProps {
 }
 
 export type Tagtype = {
-  type : "blue" | "green" | "silver" 
+  $type : "blue" | "green" | "silver" 
 } 
 
 export interface PaginationProps {

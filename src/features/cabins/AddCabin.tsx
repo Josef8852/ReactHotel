@@ -10,7 +10,7 @@ const AddCabin: React.FC = () => {
     <div>
     <Modal>
       <Modal.Open opens="cabin-form-add">
-        <Button variant="primary" size="medium">Add new cabin</Button>
+        <Button $variant="primary" $size="medium">Add new cabin</Button>
       </Modal.Open>
       <Modal.Window name="cabin-form-add">
         <CabinForm/>

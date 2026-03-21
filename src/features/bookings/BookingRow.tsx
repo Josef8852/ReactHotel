@@ -51,7 +51,7 @@ const  BookingRow:React.FC<BookingRowProps> = ({
   
 
   // Record [key, value]
-  const statusToTagName : Record<BookingRowProps["booking"]["status"] ,Tagtype["type"] > = {
+  const statusToTagName : Record<BookingRowProps["booking"]["status"] ,Tagtype["$type"] > = {
     unconfirmed: "blue", 
     checked_in: "green", 
     checked_out : "silver" 
@@ -79,7 +79,7 @@ const  BookingRow:React.FC<BookingRowProps> = ({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("_", " ")}</Tag>
+      <Tag $type={statusToTagName[status]}>{status.replace("_", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
     </Table.Row>

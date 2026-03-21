@@ -7,7 +7,7 @@ const SortBy: React.FC<SortByProps> = ({ options }) => {
   
   const [searchParams, setSearchParams] = useSearchParams();
   
-  const sortBy = searchParams.get("sortBy") as SortOptionsObj["value"];
+  const sortBy = searchParams.get("sortBy") as SortOptionsObj["value"] || "";
   
   const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
     searchParams.set("sortBy", e.target.value);

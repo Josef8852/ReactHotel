@@ -14,12 +14,12 @@ const StyledFilter = styled.div`
 
 
 
-const FilterButton = styled.button<{active?: boolean | null}>`
+const FilterButton = styled.button<{$active?: boolean | null}>`
   background-color: var(--color-grey-0);
   border: none;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);
@@ -52,8 +52,8 @@ const Filter: React.FC<FilterProps> = ({filterField , options}) => {
   
   return (
     <StyledFilter>
-      {options.map((option) => <FilterButton disabled={currentFilter === option.value}
-        active={currentFilter === option.value}
+      {options.map((option) => <FilterButton key={option.label} disabled={currentFilter === option.value}
+        $active={currentFilter === option.value}
         onClick={() => handleClick(option.value)}>{option.label}</FilterButton>)}
     </StyledFilter>
   )

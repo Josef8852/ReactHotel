@@ -7,13 +7,13 @@ const Row = styled.div<RowProps>`
       
     display: flex ;
   
-    ${props => props.variant === "horizontal" && css`
+    ${props => props.$variant === "horizontal" && css`
       justify-content:space-between ;
       align-items:center ;
       `}
     
     
-    ${props => props.variant === "vertical" && css`
+    ${props => props.$variant === "vertical" && css`
         flex-direction: column;
         gap:1.6rem;
       `}
@@ -22,7 +22,7 @@ const Row = styled.div<RowProps>`
 `
 
 Row.defaultProps = {
-  variant : "vertical"
+  $variant : "vertical"
 }
 
 

@@ -4,7 +4,7 @@ import Row from "../ui/Row";
 
 const Settings:React.FC = () => {
   return (
-    <Row variant="vertical">
+    <Row $variant="vertical">
       <Heading as="h1">Update hotel settings</Heading>
       <UpdateSettingsForm/>
     </Row>

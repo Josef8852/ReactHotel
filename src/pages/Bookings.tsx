@@ -6,7 +6,7 @@ import Row from "../ui/Row";
 const Bookings:React.FC = () => {
   return (
     <>
-    <Row variant="horizontal">
+    <Row $variant="horizontal">
       <Heading as="h1">All bookings</Heading>
       <BookingTableOperations/>
       </Row>
