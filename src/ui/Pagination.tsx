@@ -1,4 +1,7 @@
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import styled from "styled-components";
+import type { PaginationProps } from "./UITypes";
+import { useSearchParams } from "react-router-dom";
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -21,10 +24,10 @@ const Buttons = styled.div`
   gap: 0.6rem;
 `;
 
-const PaginationButton = styled.button`
+const PaginationButton = styled.button<{$active? : boolean}>`
   background-color: ${(props) =>
-    props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
-  color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
+    props.$active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
+  color: ${(props) => (props.$active ? " var(--color-brand-50)" : "inherit")};
   border: none;
   border-radius: var(--border-radius-sm);
   font-weight: 500;
@@ -55,3 +58,52 @@ const PaginationButton = styled.button`
     color: var(--color-brand-50);
   }
 `;
+  
+
+
+const Pagination: React.FC<PaginationProps> = ({numOfResults}) => {
+  
+  const MAX_BOOKINGS = 10;
+  
+  
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const currentPage: number = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  
+  const pageCount = Math.ceil(numOfResults / MAX_BOOKINGS);
+  
+  const prevPage = () : void => {
+    const prev = currentPage === 1 ? currentPage : currentPage - 1;
+    searchParams.set("page", String(prev));
+    setSearchParams(searchParams);
+  }
+  
+  
+  const nextPage = () : void => {
+    const next = currentPage === pageCount ? currentPage : currentPage + 1; 
+    searchParams.set("page", String(next));
+    setSearchParams(searchParams);
+  }
+  
+    if (numOfResults <= MAX_BOOKINGS) return null;
+  
+  return (
+    <StyledPagination>
+      <P>showing <span>{(currentPage - 1) * MAX_BOOKINGS + 1}
+      </span> to <span>{currentPage * MAX_BOOKINGS}
+        </span> of <span>{numOfResults}</span> results</P>
+      <Buttons>
+        <PaginationButton disabled={currentPage === 1} onClick={prevPage}>
+          <HiChevronLeft/><span>previous</span>
+        </PaginationButton>
+        <PaginationButton disabled={currentPage === pageCount} onClick={nextPage}>
+          <HiChevronRight/><span>next</span>
+     </PaginationButton>
+      </Buttons>
+    </StyledPagination>
+  )
+  
+}
+
+
+export default Pagination;

@@ -5,6 +5,7 @@ import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import type { Booking } from "./BookingTypes";
+import Pagination from "../../ui/Pagination";
 
 const BookingsTable: React.FC = () => {
   
@@ -13,7 +14,6 @@ const BookingsTable: React.FC = () => {
   if (!bookings?.length) return <Empty resourceName="bookings" />
   
   if (isLoading) return <Spinner />
-
 
   
   
@@ -36,6 +36,9 @@ const BookingsTable: React.FC = () => {
           )}
         />
       </Table>
+      <Table.Footer>
+        <Pagination numOfResults={bookings.length} />
+      </Table.Footer>
     </Menus>
   );
 }

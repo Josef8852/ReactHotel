@@ -231,3 +231,6 @@ export type Tagtype = {
   type : "blue" | "green" | "silver" 
 } 
 
+export interface PaginationProps {
+  numOfResults: number 
+}
