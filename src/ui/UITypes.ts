@@ -232,5 +232,5 @@ export type Tagtype = {
 } 
 
 export interface PaginationProps {
-  numOfResults: number 
+  numOfResults?: number 
 }

@@ -1,12 +1,15 @@
 import type { Booking } from "../features/bookings/BookingTypes";
 import { getToday } from "../utils/helpers";
-import type { Filter, Sort } from "./apiTypes";
+import type { Filter, getBookingsPromise, Sort } from "./apiTypes";
+import { MAX_BOOKINGS } from "../utils/constants";
 import supabase from "./supabase";
 
 
-export const getBookings = async (filter : Filter , sort : Sort) => {
+export const getBookings = async (filter: Filter, sort: Sort, page: number)
+  : Promise<getBookingsPromise> => {
   
-  let query =  supabase.from("bookings").select("*,cabins(name),guests(fullName,email)");
+  let query = supabase.from("bookings").select("*,cabins(name),guests(fullName,email)",
+    { count: "exact" });
   
   
   if (filter) {
@@ -18,14 +21,23 @@ export const getBookings = async (filter : Filter , sort : Sort) => {
     query = query.order(sort.field , {ascending:sort.direction === "asc"});
   }
   
-  const { data, error } = await query;
+  if (page) {
+    const from = (page - 1) * MAX_BOOKINGS;
+    const to = from + MAX_BOOKINGS - 1;
+    query = query.range(from ,to);
+  }
+  
+  
+  const { data, error , count } = await query;
+  
+  
   
   if (error) {
     console.error(error);
     throw new Error("Booking couldnt be loaded");
   }
   
-  return data;
+  return {data , count : count ?? undefined}
   
 }
 

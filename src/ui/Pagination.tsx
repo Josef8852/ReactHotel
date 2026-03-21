@@ -2,6 +2,7 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import styled from "styled-components";
 import type { PaginationProps } from "./UITypes";
 import { useSearchParams } from "react-router-dom";
+import { MAX_BOOKINGS } from "../utils/constants";
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -61,14 +62,15 @@ const PaginationButton = styled.button<{$active? : boolean}>`
   
 
 
-const Pagination: React.FC<PaginationProps> = ({numOfResults}) => {
+const Pagination: React.FC<PaginationProps> = ({numOfResults = 0}) => {
   
-  const MAX_BOOKINGS = 10;
   
   
   const [searchParams, setSearchParams] = useSearchParams();
   
   const currentPage: number = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  
+
   
   const pageCount = Math.ceil(numOfResults / MAX_BOOKINGS);
   
@@ -85,19 +87,19 @@ const Pagination: React.FC<PaginationProps> = ({numOfResults}) => {
     setSearchParams(searchParams);
   }
   
-    if (numOfResults <= MAX_BOOKINGS) return null;
+    if (numOfResults < 1) return null;
   
   return (
     <StyledPagination>
       <P>showing <span>{(currentPage - 1) * MAX_BOOKINGS + 1}
-      </span> to <span>{currentPage * MAX_BOOKINGS}
+      </span> to <span>{currentPage * MAX_BOOKINGS > numOfResults ? numOfResults : currentPage * MAX_BOOKINGS}
         </span> of <span>{numOfResults}</span> results</P>
       <Buttons>
         <PaginationButton disabled={currentPage === 1} onClick={prevPage}>
-          <HiChevronLeft/><span>previous</span>
+          <HiChevronLeft/><span>Previous</span>
         </PaginationButton>
         <PaginationButton disabled={currentPage === pageCount} onClick={nextPage}>
-          <HiChevronRight/><span>next</span>
+          <HiChevronRight/><span>Next</span>
      </PaginationButton>
       </Buttons>
     </StyledPagination>

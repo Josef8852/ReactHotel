@@ -1,0 +1,1 @@
+  export const MAX_BOOKINGS : number = 5;

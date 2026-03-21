@@ -1,17 +1,23 @@
+import type { Booking } from "../features/bookings/BookingTypes";
 import type { NewCabin } from "../features/cabins/CabinsTypes"
 
-export type CreateEditCabinArgs = {
+export interface CreateEditCabinArgs  {
   newCabin: NewCabin; 
   id?: number; 
 }
 
-export type Filter = {
+export  type Filter  =  {
   field: string;
   value: string;
   method: "eq" | "neq" | "gt" | "gte" | "lt" | "lte";
-} | null;
+} | null 
 
-export type Sort  = {
+export interface Sort   {
   field: string; 
   direction: string;
+}
+
+export interface getBookingsPromise  {
+  data: Booking[]; 
+  count?: number  ;
 }

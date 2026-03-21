@@ -11,7 +11,7 @@ const BookingsTable: React.FC = () => {
   
   const { isLoading, bookings } = useBookings();
 
-  if (!bookings?.length) return <Empty resourceName="bookings" />
+  if (!bookings?.data.length) return <Empty resourceName="bookings" />
   
   if (isLoading) return <Spinner />
 
@@ -30,14 +30,14 @@ const BookingsTable: React.FC = () => {
         </Table.Header>
 
         <Table.Body<Booking>
-          data={bookings}
+          data={bookings.data}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
       </Table>
       <Table.Footer>
-        <Pagination numOfResults={bookings.length} />
+        <Pagination numOfResults={bookings.count} />
       </Table.Footer>
     </Menus>
   );
