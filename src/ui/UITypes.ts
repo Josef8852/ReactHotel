@@ -136,11 +136,12 @@ type Position = {
 }
 
 export interface StyledListProps {
-  position: Position | null;
+  $position: Position | null;
 }
 
 export interface MenuButtonProps {
   children: ReactNode;
+  onClick?: () => void;
 }
 
 export interface MenusCompound extends React.FC<MenusProps> {
@@ -233,4 +234,11 @@ export type Tagtype = {
 
 export interface PaginationProps {
   numOfResults?: number 
+}
+
+
+export interface DataItemProps {
+  children: ReactNode; 
+  label: string; 
+  icon: ReactNode;
 }

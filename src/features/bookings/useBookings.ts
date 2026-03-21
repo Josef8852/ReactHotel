@@ -1,7 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { getBookings } from "../../services/apiBookings"
-import { useSearchParams } from "react-router-dom"
+import { getBooking, getBookings } from "../../services/apiBookings"
+import { useParams, useSearchParams } from "react-router-dom"
 import type { Filter, getBookingsPromise, Sort } from "../../services/apiTypes"
+import type { Booking, BookingRowProps } from "./BookingTypes"
+import type { Tagtype } from "../../ui/UITypes"
 
 export const useBookings = () => {
   
@@ -45,3 +47,28 @@ export const useBookings = () => {
   return {isLoading , error , bookings }
   
 }
+
+
+
+export const useBooking = () => {
+  
+  const {bookingId} = useParams();
+
+  
+  const {isLoading , data:booking,error} = useQuery<Booking>({
+    queryKey: ['booking'],
+    queryFn:  () => getBooking(Number(bookingId)),
+  })
+  
+  
+  return {isLoading , error , booking}
+  
+}
+
+
+
+export const statusToTagName : Record<BookingRowProps["booking"]["status"] ,Tagtype["$type"] > = {
+  unconfirmed: "blue", 
+  checked_in: "green", 
+  checked_out : "silver" 
+};

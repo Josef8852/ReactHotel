@@ -2,10 +2,13 @@ import { format, isToday } from "date-fns";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import type { BookingRowProps } from "./BookingTypes";
-import type { Tagtype } from "../../ui/UITypes";
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 import styled from "styled-components";
+import Menus from "../../ui/Menus";
+import { HiEye } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import { statusToTagName } from "./useBookings";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -34,28 +37,22 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-const  BookingRow:React.FC<BookingRowProps> = ({
+const BookingRow: React.FC<BookingRowProps> = ({
+  
   booking: {
     id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     guests : {fullName , email},
     cabins  : {name}
   },
 }) => {
-  
 
-  // Record [key, value]
-  const statusToTagName : Record<BookingRowProps["booking"]["status"] ,Tagtype["$type"] > = {
-    unconfirmed: "blue", 
-    checked_in: "green", 
-    checked_out : "silver" 
-  };
+  const navigate = useNavigate();
+  
 
   return (
     <Table.Row>
@@ -82,6 +79,17 @@ const  BookingRow:React.FC<BookingRowProps> = ({
       <Tag $type={statusToTagName[status]}>{status.replace("_", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
+      
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.MenuButton onClick={() => navigate(`/booking/${bookingId}`)}>
+            <HiEye/> See Details
+          </Menus.MenuButton>
+        </Menus.List>
+      </Menus.Menu>
+      
+      
     </Table.Row>
   );
 }

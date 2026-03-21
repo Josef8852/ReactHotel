@@ -12,6 +12,7 @@ export interface Booking {
   cabinPrice: number; 
   extrasPrice: number; 
   totalPrice: number;
+  observations: string;
   status:  "unconfirmed" | "checked_in" | "checked_out";
   hasBreakfast: boolean; 
   isPaid: boolean; 
@@ -23,5 +24,9 @@ export interface Booking {
 }
 
 export interface BookingRowProps {
+  booking: Booking;
+}
+
+export interface BookingDataBoxProps {
   booking: Booking;
 }

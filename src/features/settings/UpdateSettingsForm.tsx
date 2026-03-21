@@ -30,7 +30,7 @@ const UpdateSettingsForm: React.FC = () => {
   return (
     <Form $type='regular'>
       <FormRow label='Minimum nights/booking'>
-        <Input defaultValue={minBookingLength} type='number' id='min-nights'
+        <Input  defaultValue={minBookingLength} type='number' id='min-nights'
           onBlur={e => handleUpdateSetting(e, "minBookingLength")
            }
            disabled={isPending}

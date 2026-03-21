@@ -5,6 +5,7 @@ export interface Guest {
   fullName: string; 
   email: string; 
   nationality: string; 
+  country: string;
   countryFlag: string; 
   nationalID: string; 
 }

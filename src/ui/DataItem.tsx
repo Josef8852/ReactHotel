@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import type { DataItemProps } from "./UITypes";
 
 const StyledDataItem = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const Label = styled.span`
   }
 `;
 
-const DataItem:React.FC = ({ icon, label, children }) => {
+const DataItem:React.FC<DataItemProps> = ({ icon, label, children }) => {
   return (
     <StyledDataItem>
       <Label>

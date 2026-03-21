@@ -40,8 +40,8 @@ const StyledList  = styled.ul<StyledListProps>`
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
 
-  right: ${(props) => props.position?.x}px;
-  top: ${(props) => props.position?.y}px;
+  right: ${(props) => props.$position?.x}px;
+  top: ${(props) => props.$position?.y}px;
 `;
 
 const StyledButton = styled.button`
@@ -74,7 +74,7 @@ const MenusContext = createContext<MenusContextTypes>({
   openId: null,
   close: () => {} , 
   open: () => { },
-  position: null,
+  $position: null,
   setPosition : () => {} 
 });
 
@@ -82,7 +82,7 @@ const Menus: MenusCompound = ({ children }) => {
   
   const [openId, setOpenId] = useState<number | null>(null);
   
-  const [position, setPosition] = useState<{x : number , y : number} | null>(null);
+  const [$position, setPosition] = useState<{x : number , y : number} | null>(null);
   
   const close = () => setOpenId(null);
   
@@ -93,7 +93,7 @@ const Menus: MenusCompound = ({ children }) => {
       openId,
       close, 
       open, 
-      position, 
+      $position, 
       setPosition ,
     }}>
         {children}
@@ -143,7 +143,7 @@ const Toggle: React.FC<ToggleProps> = ({ id }) => {
 
 const List: React.FC<ListProps> = ({ id ,children }) => {
   
-  const { openId, position ,close } = useContext(MenusContext);
+  const { openId, $position ,close } = useContext(MenusContext);
   
   // We pass the desired Html Element
   const { ref } = useClickOutside<HTMLUListElement>(close); 
@@ -152,7 +152,7 @@ const List: React.FC<ListProps> = ({ id ,children }) => {
   if (openId !== id) return null;
  
   return createPortal(
-    <StyledList ref={ref} position={position}>
+    <StyledList ref={ref} $position={$position}>
       {children}
     </StyledList>
     , document.body
@@ -160,7 +160,7 @@ const List: React.FC<ListProps> = ({ id ,children }) => {
 }
 
 
-// ...props are the props injected by Modal.Open
+// ...props are the props injected by Modal.Open or onClick
 const MenuButton: React.FC<MenuButtonProps> = ({children ,...props}) => {
   return (
     <li>

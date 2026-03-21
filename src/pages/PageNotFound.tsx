@@ -37,7 +37,7 @@ const PageNotFound:React.FC = () => {
         <Heading as="h1">
           The page you are looking for could not be found 😢
         </Heading>
-        <Button onClick={moveBack} size="large" variant="primary">
+        <Button onClick={moveBack} $size="large" $variant="primary">
           &larr; Go back
         </Button>
       </Box>
