@@ -9,7 +9,9 @@ import Menus from "../../ui/Menus";
 import { HiEye } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { statusToTagName } from "./useBookings";
-import { HiArrowDownOnSquare } from "react-icons/hi2";
+import { HiArrowDownOnSquare, HiArrowUpOnSquare } from "react-icons/hi2";
+import { useCheckOut } from "../checkInOut/useCheckOut";
+import Spinner from "../../ui/Spinner";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -55,7 +57,10 @@ const BookingRow: React.FC<BookingRowProps> = ({
 
   const navigate = useNavigate();
   
-
+  const { mutate, isPending } = useCheckOut();
+  
+  if(isPending) return <Spinner/>
+  
   return (
     <Table.Row>
       <Cabin>{name}</Cabin>
@@ -93,6 +98,16 @@ const BookingRow: React.FC<BookingRowProps> = ({
         {status === "unconfirmed"  || (!hasBreakfast && status === "checked_in")  ?   <Menus.MenuButton onClick={() => navigate(`/checkin/${bookingId}`)}>
           <HiArrowDownOnSquare/> {!hasBreakfast ? "Edit" : "Check In"}
         </Menus.MenuButton> : null }
+          
+          
+          {status === "checked_in" ? <Menus.MenuButton onClick={() => mutate({
+            id: bookingId, 
+            booking: {
+              status : "checked_out"
+            }
+       })}>
+         <HiArrowUpOnSquare/> Check Out
+       </Menus.MenuButton>  : null}
           
         </Menus.List>
       </Menus.Menu>
