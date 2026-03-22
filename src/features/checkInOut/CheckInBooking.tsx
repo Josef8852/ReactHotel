@@ -9,7 +9,10 @@ import ButtonText from "../../ui/ButtonText";
 import { useBooking } from "../bookings/useBookings";
 import Empty from "../../ui/Empty";
 import Spinner from "../../ui/Spinner";
-
+import Checkbox from "../../ui/Checkbox";
+import {  useState } from "react";
+import { formatCurrency } from "../../utils/helpers";
+import { useCheckIn } from "./useCheckIn";
 
 
 
@@ -23,15 +26,35 @@ const Box = styled.div`
 
 const CheckInBooking: React.FC = () => {
   
+  
   const moveBack = useMoveBack();
 
-  const { booking , isLoading} = useBooking();
+  const { booking, isLoading } = useBooking();
+    
+  const [confirmPay, setConfirmPay] = useState<boolean | null>(null)
+
+  //No use Effect optimize and avoid unnecessary rerenders
+  const isPaid: boolean = confirmPay ?? booking?.isPaid ?? false;
   
-  const handleCheckin = () :void => { }
+  const { mutate, isPending } = useCheckIn();
+  
+  const handleCheckin = (): void => { 
+    
+    if (!booking || !isPaid) return;
+    
+    mutate({
+      id: booking.id, 
+      booking : {isPaid : true , status : "checked_in"}
+    });
+  }
+  
+  
+  
+  if (isLoading) return <Spinner />
   
   if (!booking) return <Empty resourceName="booking" />;
+
   
-  if(isLoading) return <Spinner/>
 
   return (
     <>
@@ -42,10 +65,21 @@ const CheckInBooking: React.FC = () => {
 
       <BookingDataBox booking={booking} />
       
-     
+      <Box>
+        <Checkbox
+          checked={isPaid}
+          id="confirm"
+          onChange={() => setConfirmPay((confirm) => !(confirm ?? booking.isPaid))}
+          disabled={booking.isPaid || isPending}
+        >
+          
+          I confirm that {booking.guests.fullName} has paid the total amount 
+          of {formatCurrency(booking.totalPrice)}
+        </Checkbox>
+      </Box>
 
       <ButtonGroup>
-        <Button $variant="primary" $size="medium" onClick={handleCheckin}>Check in booking #{booking.id}</Button>
+        <Button  disabled={!isPaid || isPending} $variant="primary" $size="medium" onClick={handleCheckin}>Check in booking #{booking.id}</Button>
         <Button $variant="secondary" $size="small" onClick={moveBack}>
           Back
         </Button>

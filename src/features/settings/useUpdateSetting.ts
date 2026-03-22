@@ -1,6 +1,7 @@
 import { useQueryClient ,useMutation } from "@tanstack/react-query";
 import {  updateSetting } from "../../services/apiSettings";
 import toast from "react-hot-toast";
+import type { SettingsObj } from "./SettingsTypes";
 
 export const useUpdateSetting = () => {
   
@@ -8,7 +9,7 @@ export const useUpdateSetting = () => {
 
   const { mutate, isPending } = useMutation({
   
-  mutationFn: updateSetting,
+  mutationFn: (setting : Partial<SettingsObj>) => updateSetting(setting),
   
     onSuccess: () => {
    

@@ -12,7 +12,7 @@ export const  getSettings = async () => {
 }
 
 
-export const updateSetting = async (newSetting: SettingToUpdate) =>  {
+export const updateSetting = async (newSetting: Partial<SettingToUpdate>) =>  {
   const { data, error } = await supabase
     .from("settings")
     .update(newSetting)

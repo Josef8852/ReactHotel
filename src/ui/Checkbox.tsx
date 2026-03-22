@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import type { CheckboxProps } from "./UITypes";
 
 const StyledCheckbox = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const StyledCheckbox = styled.div`
 
 
 
-const  Checkbox:React.FC = ({ checked, onChange, disabled = false, id, children }) => {
+const  Checkbox:React.FC<CheckboxProps> = ({ checked, onChange, disabled = false, id, children }) => {
   return (
     <StyledCheckbox>
       <input

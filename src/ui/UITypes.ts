@@ -242,3 +242,11 @@ export interface DataItemProps {
   label: string; 
   icon: ReactNode;
 }
+
+export interface CheckboxProps {
+  checked: boolean; 
+  children: ReactNode;
+  onChange: () => void; 
+  disabled: boolean; 
+  id: string;
+}

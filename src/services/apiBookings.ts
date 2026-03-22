@@ -110,7 +110,7 @@ export const  getStaysTodayActivity = async () => {
   return data;
 }
 
-export const updateBooking = async (id : number, obj:Booking) => {
+export const updateBooking = async (id : number , obj:Partial<Booking>) => {
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)

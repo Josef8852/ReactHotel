@@ -24,7 +24,9 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , onCloseModal}) => {
     defaultValues: isEditSession ? editValues : {}, 
   });
   
-      const { mutate, isPending } = useCreateUpdateCabin(editId , reset);
+  
+  
+   const { mutate, isPending } = useCreateUpdateCabin(editId , reset);
   
    const { errors } = formState;
 
