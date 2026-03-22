@@ -1,5 +1,9 @@
 import {BrowserRouter, Navigate} from "react-router-dom"
-import { Routes , Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+import { toasterStyles } from "./ui/Toaster";
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
 import Cabins from "./pages/Cabins";
@@ -10,11 +14,8 @@ import Bookings from "./pages/Bookings";
 import PageNotFound from "./pages/PageNotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
-import { toasterStyles } from "./ui/Toaster";
 import BookingPage from "./pages/BookingPage";
+import CheckIn from "./pages/CheckIn";
 
 
 const queryClient = new QueryClient({
@@ -57,6 +58,7 @@ const App: React.FC = () => {
             <Route path="/users" element={<NewUsers />} />
             <Route path="/bookings" element={<Bookings />} /> 
             <Route path="/booking/:bookingId" element={<BookingPage />} /> 
+            <Route path="/checkin/:bookingId" element={<CheckIn />} /> 
           </Route>
   
              <Route path="/login" element={<Login />} />  

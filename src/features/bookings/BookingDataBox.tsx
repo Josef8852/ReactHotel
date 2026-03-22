@@ -13,6 +13,8 @@ import { Flag } from "../../ui/Flag";
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import type { BookingDataBoxProps } from "./BookingTypes";
 
+
+
 const StyledBookingDataBox = styled.section`
   /* Box */
   background-color: var(--color-grey-0);
@@ -120,6 +122,8 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
     cabins: { name: cabinName },
   } = booking;
 
+  
+  
   return (
     <StyledBookingDataBox>
       <Header>
@@ -181,6 +185,9 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
       <Footer>
         <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
       </Footer>
+      
+     
+      
     </StyledBookingDataBox>
   );
 }

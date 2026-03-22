@@ -9,6 +9,7 @@ import Menus from "../../ui/Menus";
 import { HiEye } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { statusToTagName } from "./useBookings";
+import { HiArrowDownOnSquare } from "react-icons/hi2";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -83,9 +84,15 @@ const BookingRow: React.FC<BookingRowProps> = ({
       <Menus.Menu>
         <Menus.Toggle id={bookingId} />
         <Menus.List id={bookingId}>
+          
           <Menus.MenuButton onClick={() => navigate(`/booking/${bookingId}`)}>
             <HiEye/> See Details
           </Menus.MenuButton>
+          
+        {status === "unconfirmed" ?   <Menus.MenuButton onClick={() => navigate(`/checkin/${bookingId}`)}>
+          <HiArrowDownOnSquare/> Check in
+        </Menus.MenuButton> : null }
+          
         </Menus.List>
       </Menus.Menu>
       
