@@ -12,6 +12,7 @@ import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import type { BookingDataBoxProps } from "./BookingTypes";
+import { useSettings } from "../settings/useSettings";
 
 
 
@@ -113,7 +114,6 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
     numNights,
     numGuests,
     cabinPrice,
-    extrasPrice,
     totalPrice,
     hasBreakfast,
     observations,
@@ -122,7 +122,10 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
     cabins: { name: cabinName },
   } = booking;
 
+  const { settings } = useSettings();
   
+  
+  const totalBreakfastPrice: number = (settings?.breakfastPrice ?? 0) * numGuests * numNights;
   
   return (
     <StyledBookingDataBox>
@@ -174,7 +177,7 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
 
             {hasBreakfast &&
               ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
+                totalBreakfastPrice
               )} breakfast)`}
           </DataItem>
 

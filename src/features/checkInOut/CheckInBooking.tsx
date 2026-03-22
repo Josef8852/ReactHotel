@@ -7,12 +7,12 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import { useBooking } from "../bookings/useBookings";
-import Empty from "../../ui/Empty";
 import Spinner from "../../ui/Spinner";
 import Checkbox from "../../ui/Checkbox";
 import {  useState } from "react";
 import { formatCurrency } from "../../utils/helpers";
 import { useCheckIn } from "./useCheckIn";
+import { useSettings } from "../settings/useSettings";
 
 
 
@@ -32,28 +32,42 @@ const CheckInBooking: React.FC = () => {
   const { booking, isLoading } = useBooking();
     
   const [confirmPay, setConfirmPay] = useState<boolean | null>(null)
+  
+  const [addBreakfast , setAddBreakfast] = useState<boolean | null>(null)
 
   //No use Effect optimize and avoid unnecessary rerenders
   const isPaid: boolean = confirmPay ?? booking?.isPaid ?? false;
   
+  const isBreakfast : boolean = addBreakfast ?? booking?.hasBreakfast ?? false;
+  
   const { mutate, isPending } = useCheckIn();
+  
+  const { settings } = useSettings();
+  
+    
+  
+   if (!booking || !settings || isLoading) return <Spinner/>;
+  
+  const totalBreakfastPrice : number = settings?.breakfastPrice*
+  booking?.numGuests* 
+  booking?.numNights
+  
   
   const handleCheckin = (): void => { 
     
     if (!booking || !isPaid) return;
     
+    
     mutate({
       id: booking.id, 
-      booking : {isPaid : true , status : "checked_in"}
+      booking: {
+        isPaid: true,
+        status: "checked_in", 
+        hasBreakfast: isBreakfast ?? false,
+        totalPrice : booking.totalPrice + totalBreakfastPrice
+      }
     });
   }
-  
-  
-  
-  if (isLoading) return <Spinner />
-  
-  if (!booking) return <Empty resourceName="booking" />;
-
   
 
   return (
@@ -65,6 +79,20 @@ const CheckInBooking: React.FC = () => {
 
       <BookingDataBox booking={booking} />
       
+      
+      {!booking.hasBreakfast ? <Box>
+        <Checkbox
+        disabled={isPending}
+        checked = {isBreakfast}
+          onChange={() => {
+            setAddBreakfast((has) => !(has ?? booking.hasBreakfast))
+          }}
+          id="breakfast"
+        >
+          Want ot add Breakfast for {formatCurrency(totalBreakfastPrice  ?? 0)}
+        </Checkbox>
+      </Box> : null}
+      
       <Box>
         <Checkbox
           checked={isPaid}
@@ -74,9 +102,15 @@ const CheckInBooking: React.FC = () => {
         >
           
           I confirm that {booking.guests.fullName} has paid the total amount 
-          of {formatCurrency(booking.totalPrice)}
+          of {addBreakfast || booking.hasBreakfast ?
+            formatCurrency(booking.totalPrice + totalBreakfastPrice) +
+            `  (${formatCurrency(booking.totalPrice)}) + (${formatCurrency(totalBreakfastPrice)})` : 
+            formatCurrency(booking.totalPrice)
+          }
         </Checkbox>
       </Box>
+      
+  
 
       <ButtonGroup>
         <Button  disabled={!isPaid || isPending} $variant="primary" $size="medium" onClick={handleCheckin}>Check in booking #{booking.id}</Button>

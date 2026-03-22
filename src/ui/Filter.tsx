@@ -47,6 +47,7 @@ const Filter: React.FC<FilterProps> = ({filterField , options}) => {
   
   const handleClick = (value : string) : void => {
     searchParams.set(filterField, value);
+    searchParams.set("page", "1"); // reset when switching between filters to avoid out of range in supabase
     setSearchParams(searchParams);
   }
   

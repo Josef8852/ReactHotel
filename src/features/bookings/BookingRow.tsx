@@ -44,6 +44,7 @@ const BookingRow: React.FC<BookingRowProps> = ({
     id: bookingId,
     startDate,
     endDate,
+    hasBreakfast ,
     numNights,
     totalPrice,
     status,
@@ -89,8 +90,8 @@ const BookingRow: React.FC<BookingRowProps> = ({
             <HiEye/> See Details
           </Menus.MenuButton>
           
-        {status === "unconfirmed" ?   <Menus.MenuButton onClick={() => navigate(`/checkin/${bookingId}`)}>
-          <HiArrowDownOnSquare/> Check in
+        {status === "unconfirmed"  || (!hasBreakfast && status === "checked_in")  ?   <Menus.MenuButton onClick={() => navigate(`/checkin/${bookingId}`)}>
+          <HiArrowDownOnSquare/> {!hasBreakfast ? "Edit" : "Check In"}
         </Menus.MenuButton> : null }
           
         </Menus.List>
