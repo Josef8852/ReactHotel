@@ -125,7 +125,7 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
   const { settings } = useSettings();
   
   
-  const totalBreakfastPrice: number = (settings?.breakfastPrice ?? 0) * numGuests * numNights;
+  const totalBreakfastPrice: number = (settings?.breakfastPrice ?? 0) * numGuests * numNights ;
   
   return (
     <StyledBookingDataBox>

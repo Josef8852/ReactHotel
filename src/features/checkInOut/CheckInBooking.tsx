@@ -98,7 +98,7 @@ const CheckInBooking: React.FC = () => {
           checked={isPaid}
           id="confirm"
           onChange={() => setConfirmPay((confirm) => !(confirm ?? booking.isPaid))}
-          disabled={booking.isPaid || isPending}
+          disabled={isPending}
         >
           
           I confirm that {booking.guests.fullName} has paid the total amount 

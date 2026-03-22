@@ -27,9 +27,9 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ resourceName, onConfirm, 
   
   return (
     <StyledConfirmDelete>
-      <Heading as="h3">Delete Cabin {resourceName}</Heading>
+      <Heading as="h3">Delete  {resourceName}</Heading>
       <p>
-        Are you sure you want to delete this Cabin {resourceName} permanently? This
+        Are you sure you want to delete this  {resourceName} permanently? This
         action cannot be undone.
       </p>
 
