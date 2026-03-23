@@ -20,7 +20,12 @@ const  LoginForm:React.FC = () => {
     
     if (!email || !password) return;
     
-    login({ email, password });
+    login({ email, password }, {
+      onSettled: () => {
+        setEmail("");
+        setPassword("");
+      }
+    });
   }
   
 

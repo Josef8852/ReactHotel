@@ -16,6 +16,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
 import BookingPage from "./pages/BookingPage";
 import CheckIn from "./pages/CheckIn";
+import ProtectedRoute from "./features/auth/ProtectedRoute";
 
 
 const queryClient = new QueryClient({
@@ -49,7 +50,11 @@ const App: React.FC = () => {
       <GlobalStyles/>
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout/>} >
+          <Route element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>} 
+          >
             <Route index element={<Navigate replace to="/dashboard" />} />
             <Route index path="/dashboard"  element={<Dashboard />} />
             <Route path="/account" element={<Account />} />
