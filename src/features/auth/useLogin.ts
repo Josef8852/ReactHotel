@@ -19,7 +19,7 @@ export const useLogin = () => {
     onSuccess: (user) => {
       toast.success("Loged in Successfully!");
       queryClient.setQueryData(["user"], user);
-      navigate("/dashboard");
+      navigate("/dashboard" ,{replace : true});
     },
     
     onError: () => {

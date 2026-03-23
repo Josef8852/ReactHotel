@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logout from "../features/auth/Logout";
 
 const StyledHeader = styled.header`
   background-color:var(--color-greay-0);
@@ -10,7 +11,7 @@ const Header: React.FC = () => {
   
   return (
     <StyledHeader>
-      header
+      <Logout/>
     </StyledHeader>
   )
   
