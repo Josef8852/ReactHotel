@@ -21,6 +21,10 @@ export interface FormRowProps {
   id?: string;
 }
 
+export interface FormRowVerticalProps extends Omit<FormRowProps, "id"> {
+  htmlFor?: string;
+}
+
 
 export interface FormProps {
   $type : "modal" | "regular"
