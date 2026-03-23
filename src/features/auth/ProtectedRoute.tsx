@@ -24,7 +24,7 @@ const ProtectedRoute: React.FC<{ children: ReactNode }> = ({ children }) => {
     if (!isAuthenticated && !isLoading && !isFetching) navigate("/login" ) 
   } ,[isAuthenticated , isLoading ,navigate , isFetching])
   
-  if (isLoading || isFetching) return (
+  if (isLoading) return (
     <FullPage>
       <Spinner />
     </FullPage>
