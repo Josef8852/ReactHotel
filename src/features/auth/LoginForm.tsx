@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useLogin } from "./useLogin";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVerical";
-import { login } from "../../services/apiAuth";
+import MiniSpinner from "../../ui/MiniSpinner";
+
 
 
 const  LoginForm:React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("someemail@email.com");
+  const [password, setPassword] = useState<string>("123456789");
+  
+  const { login , isPending} = useLogin();
 
   const handleSubmit = (e: React.SubmitEvent): void => {
     
@@ -18,6 +22,8 @@ const  LoginForm:React.FC = () => {
     
     login({ email, password });
   }
+  
+
 
   return (
     <Form $type="regular" onSubmit={handleSubmit}>
@@ -41,7 +47,7 @@ const  LoginForm:React.FC = () => {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button $variant="primary" $size="large">Login</Button>
+        <Button $variant="primary" $size="large">{!isPending ? "Login" : <MiniSpinner/>}</Button>
       </FormRowVertical>
     </Form>
   );

@@ -25,7 +25,7 @@ export interface getBookingsPromise  {
 }
 
 
-export interface LoginData {
+interface LoginData {
   user: User;
   session : AuthSession
 }

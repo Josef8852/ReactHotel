@@ -1,8 +1,8 @@
-import type { LoginData, LoginType } from "./apiTypes";
+import type { LoginType } from "./apiTypes";
 import supabase from "./supabase"
 
 
-export const login : LoginType = async ({email  , password}) : Promise<LoginData> => {
+export const login : LoginType = async ({email  , password}) => {
   
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
