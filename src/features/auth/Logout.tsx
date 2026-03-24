@@ -11,7 +11,7 @@ const Logout: React.FC = () => {
   const { logout ,isPending} = useLogout();
   
   return (
-    <ButtonIcon disabled={isPending} onClick={() => logout()}>
+    <ButtonIcon aria-label="logout" disabled={isPending} onClick={() => logout()}>
       {isPending ? <MiniSpinner/>  :<HiArrowRightOnRectangle/>}
     </ButtonIcon>
   )

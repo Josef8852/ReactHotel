@@ -18,6 +18,6 @@ export const useUser = () => {
 
   const isFetching = fetchStatus === "fetching";
   
-  return { isFetching,isLoading , isAuthenticated : user?.role === "authenticated"};
+  return { user, isFetching,isLoading , isAuthenticated : user?.role === "authenticated"};
   
 }

@@ -1,17 +1,21 @@
 import styled from "styled-components";
-import Logout from "../features/auth/Logout";
+import HeaderMenu from "./HeaderMenu";
+
 
 const StyledHeader = styled.header`
   background-color:var(--color-greay-0);
   padding :1.2rem 4.8rem;
   border-bottom:1px solid var(--color-grey-100);
+  display : flex ;
+  align-items: center ;
+  justify-content : flex-end ;
   `
 
 const Header: React.FC = () => {
   
   return (
     <StyledHeader>
-      <Logout/>
+      <HeaderMenu/>
     </StyledHeader>
   )
   
