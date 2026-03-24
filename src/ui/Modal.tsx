@@ -1,10 +1,10 @@
-import styled from "styled-components";
 import type { ModalCompound, ModalContextProps, OpenProps, WindowProps } from "./UITypes";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import { cloneElement, createContext, useContext } from "react";
 import { useState } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
+import styled from "styled-components";
 
 const StyledModal = styled.div`
   position: fixed;

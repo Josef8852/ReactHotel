@@ -1,13 +1,13 @@
 import { useCabins } from "./useCabins";
+import { useSearchParams } from "react-router-dom";
+import type { Cabin } from "./CabinsTypes";
+import type { SortOptionsObj } from "../../ui/UITypes";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
-import type { Cabin } from "./CabinsTypes";
 import Menus from "../../ui/Menus";
-import { useSearchParams } from "react-router-dom";
 import useFilterCabins from "./useFilterCabins";
 import useSortCabins from "./useSortCabins";
-import type { SortOptionsObj } from "../../ui/UITypes";
 import Empty from "../../ui/Empty";
 
 

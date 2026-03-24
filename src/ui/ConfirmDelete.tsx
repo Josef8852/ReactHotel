@@ -1,7 +1,8 @@
+import type { ConfirmDeleteProps } from "./UITypes";
 import styled from "styled-components";
 import Button from "./Button";
 import Heading from "./Heading";
-import type { ConfirmDeleteProps } from "./UITypes";
+
 
 const StyledConfirmDelete = styled.div`
   width: 40rem;

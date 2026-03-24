@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import type { DataItemProps } from "./UITypes";
+import styled from "styled-components";
+
 
 const StyledDataItem = styled.div`
   display: flex;

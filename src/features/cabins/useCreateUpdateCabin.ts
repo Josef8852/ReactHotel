@@ -1,8 +1,8 @@
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { createEditCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
 import type { UseFormReset } from "react-hook-form";
 import type { CabinFormValues } from "./CabinsTypes";
+import toast from "react-hot-toast";
 
 
 export const useCreateUpdateCabin = (editId : number | undefined , reset : UseFormReset<CabinFormValues>) => {

@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import type {
   BodyTableProps,
   HeaderTableProps,
@@ -7,8 +6,11 @@ import type {
   TableCompound,
   TableContextTypes
 } from "./UITypes";
-
 import { createContext, useContext } from "react";
+import styled from "styled-components";
+
+
+
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);

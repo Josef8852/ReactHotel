@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { format, isToday } from "date-fns";
 import {
   HiOutlineChatBubbleBottomCenterText,
@@ -6,13 +5,13 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
 } from "react-icons/hi2";
-
-import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
-
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import type { BookingDataBoxProps } from "./BookingTypes";
 import { useSettings } from "../settings/useSettings";
+import DataItem from "../../ui/DataItem";
+import styled from "styled-components";
+
 
 
 

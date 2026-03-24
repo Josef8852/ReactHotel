@@ -1,8 +1,8 @@
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import styled from "styled-components";
 import type { PaginationProps } from "./UITypes";
 import { useSearchParams } from "react-router-dom";
 import { MAX_BOOKINGS } from "../utils/constants";
+import styled from "styled-components";
 
 const StyledPagination = styled.div`
   width: 100%;

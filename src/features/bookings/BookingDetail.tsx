@@ -1,13 +1,11 @@
+import { useMoveBack } from "../../hooks/useMoveBack";
+import { statusToTagName, useBooking } from "./useBookings";
 import styled from "styled-components";
-
 import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
 import ButtonText from "../../ui/ButtonText";
-
-import { useMoveBack } from "../../hooks/useMoveBack";
-import { statusToTagName, useBooking } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import Empty from "../../ui/Empty";
 

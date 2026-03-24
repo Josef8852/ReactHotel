@@ -1,10 +1,10 @@
+import type { Booking } from "./BookingTypes";
+import { useBookings } from "./useBookings";
 import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
-import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
-import type { Booking } from "./BookingTypes";
 import Pagination from "../../ui/Pagination";
 
 const BookingsTable: React.FC = () => {

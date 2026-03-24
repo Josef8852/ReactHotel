@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import type { CheckboxProps } from "./UITypes";
+import styled from "styled-components";
+
 
 const StyledCheckbox = styled.div`
   display: flex;

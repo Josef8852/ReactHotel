@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import { createContext, useContext, useState } from "react";
+import { HiEllipsisVertical } from "react-icons/hi2";
+import { createPortal } from "react-dom";
+import { useClickOutside } from "../hooks/useClickOutside";
 import type {
   ListProps,
   MenuButtonProps,
@@ -7,11 +10,7 @@ import type {
   StyledListProps,
   ToggleProps
 } from "./UITypes";
-
-import { createContext, useContext, useState } from "react";
-import { HiEllipsisVertical } from "react-icons/hi2";
-import { createPortal } from "react-dom";
-import { useClickOutside } from "../hooks/useClickOutside";
+import styled from "styled-components";
 
 
 const StyledToggle = styled.button`

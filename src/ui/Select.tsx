@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import type { SelectProps } from "./UITypes";
+import styled from "styled-components";
+
 
 const StyledSelect = styled.select<{$type? : "white"}>`
   font-size: 1.4rem;

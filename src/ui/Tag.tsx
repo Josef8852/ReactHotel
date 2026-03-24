@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import type { Tagtype } from "./UITypes";
+import styled from "styled-components";
+
 
 const Tag = styled.span<Tagtype>`
   width: fit-content;
