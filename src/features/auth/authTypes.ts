@@ -6,3 +6,6 @@ export interface SignupFormValues {
   password: string; 
   confirmPassword: string; 
 }
+
+// we dont need confirm passwordin our Api
+export type SubmitedSignup = Omit<SignupFormValues, "confirmPassword">;

@@ -1,5 +1,25 @@
+import type { SubmitedSignup } from "../features/auth/authTypes";
 import type { LoginType } from "./apiTypes";
 import supabase from "./supabase"
+
+
+
+export const signup = async ({ fullName, email, password }:
+  SubmitedSignup) => {
+  
+  const { data, error } = await supabase.auth.signUp({
+    email, password, options: {
+      data: {
+        fullName,
+        avatar : "",
+      }
+    }
+  });
+  
+  if (error) throw new Error(error.message);
+  
+  return data;
+} 
 
 
 export const login : LoginType = async ({email  , password}) => {
@@ -18,6 +38,14 @@ export const login : LoginType = async ({email  , password}) => {
 }
 
 
+
+export const logout = async () => {
+  
+  const {error } = await supabase.auth.signOut();
+  
+  if (error) throw new Error(error.message);
+}
+
 export const getCurrentUser = async () => {
   
   const {data : session } = await supabase.auth.getSession();
@@ -34,10 +62,3 @@ export const getCurrentUser = async () => {
 }
 
 
-
-export const logout = async () => {
-  
-  const {error } = await supabase.auth.signOut();
-  
-  if (error) throw new Error(error.message);
-}

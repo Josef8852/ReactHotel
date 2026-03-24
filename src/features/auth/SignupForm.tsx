@@ -3,28 +3,36 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import type { SignupFormValues } from "./authTypes";
+import type { SignupFormValues, SubmitedSignup } from "./authTypes";
+import { useSignup } from "./useSignup";
 
 
 
 const SignupForm: React.FC = () => { 
   
   
-  const { register, formState , getValues , handleSubmit } = useForm<SignupFormValues>();
+  const { register, formState, getValues, handleSubmit , reset } = useForm<SignupFormValues>();
+  
   const { errors } = formState;
   
-  const onSubmit = (data : SignupFormValues) : void => {
-    
+  const {signup , isPending } = useSignup();
+  
+  const onSubmit = ({fullName , password , email} : SubmitedSignup) : void => {
+    signup({
+      fullName , password , email
+    }, {
+      onSettled : () => reset()
+    })
   }
   
   return (
     <Form $type="regular" onSubmit={handleSubmit(onSubmit)}>
       <FormRow label="Full name" error={errors.fullName?.message}>
-        <Input type="text" id="fullName" {...register("fullName" , {required : "This field is required"})} />
+        <Input disabled={isPending} type="text" id="fullName" {...register("fullName" , {required : "This field is required"})} />
       </FormRow>
 
       <FormRow label="Email address" error={errors.email?.message}>
-        <Input autoComplete="new-email" type="email" id="email"  {...register("email", {
+        <Input disabled={isPending} autoComplete="new-email" type="email" id="email"  {...register("email", {
           required: "This field is required",
           pattern: {
             value: /\S+@\S+\.\S+/, 
@@ -34,7 +42,7 @@ const SignupForm: React.FC = () => {
       </FormRow>
 
       <FormRow label="Password (min 8 characters)" error={errors.password?.message}>
-        <Input autoComplete="new-password"  type="password" id="password" {...register("password", {
+        <Input disabled={isPending} autoComplete="new-password"  type="password" id="password" {...register("password", {
           required: "This field is required", 
           minLength: {
             value: 8,
@@ -44,17 +52,17 @@ const SignupForm: React.FC = () => {
       </FormRow>
 
       <FormRow label="Repeat password" error={errors.confirmPassword?.message}>
-        <Input autoComplete="new-password" type="password" id="passwordConfirm" {...register("confirmPassword", {
+        <Input disabled={isPending} autoComplete="new-password" type="password" id="passwordConfirm" {...register("confirmPassword", {
           validate : (value) => Number(value) === Number(getValues().password) || "Passwords don't match"
         })} />
       </FormRow>
 
       <FormRow>
 
-        <Button $variant="secondary" $size="medium" type="reset">
+        <Button disabled={isPending} $variant="secondary" $size="medium" type="reset">
           Cancel
         </Button>
-        <Button $variant="primary" $size="large" >Create new user</Button>
+        <Button disabled={isPending} $variant="primary" $size="large" >Create new user</Button>
       </FormRow>
     </Form>
   );
