@@ -5,6 +5,8 @@ import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVerical";
 import MiniSpinner from "../../ui/MiniSpinner";
+import { useForm } from "react-hook-form";
+import type { LoginFormValues } from "./authTypes";
 
 
 
@@ -12,11 +14,14 @@ const  LoginForm:React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   
-  const { login , isPending} = useLogin();
+  const { login, isPending } = useLogin();
+  
+  const {register , formState , handleSubmit} = useForm<LoginFormValues>()
 
-  const handleSubmit = (e: React.SubmitEvent): void => {
+  const { errors } = formState;
+  
+  const onSubmit = (): void => {
     
-    e.preventDefault();
     
     if (!email || !password) return;
     
@@ -31,23 +36,26 @@ const  LoginForm:React.FC = () => {
 
 
   return (
-    <Form $type="regular" onSubmit={handleSubmit}>
-      <FormRowVertical htmlFor="email" label="Email address">
+    <Form $type="regular" onSubmit={handleSubmit(onSubmit)}>
+      <FormRowVertical error={errors.email?.message} htmlFor="email" label="Email address">
         <Input
           type="email"
           id="email"
           // This makes this form better for password managers
           autoComplete="username"
           value={email}
+          {...register("email" , {required : "This field is required"})}
           onChange={(e) => setEmail(e.target.value)}
+          
         />
       </FormRowVertical>
-      <FormRowVertical htmlFor="password" label="Password">
+      <FormRowVertical error={errors.password?.message} htmlFor="password" label="Password">
         <Input
           type="password"
           id="password"
           autoComplete="current-password"
           value={password}
+        {...register("password" , {required : "This field is required"})}
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormRowVertical>

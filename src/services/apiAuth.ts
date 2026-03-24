@@ -1,4 +1,4 @@
-import type { SubmitedSignup } from "../features/auth/authTypes";
+import type { LoginFormValues, SubmitedSignup } from "../features/auth/authTypes";
 import type { LoginType } from "./apiTypes";
 import supabase from "./supabase"
 
@@ -22,7 +22,7 @@ export const signup = async ({ fullName, email, password }:
 } 
 
 
-export const login : LoginType = async ({email  , password}) => {
+export const login : LoginType = async ({email  , password} : LoginFormValues) => {
   
   const { data, error } = await supabase.auth.signInWithPassword({
     email,

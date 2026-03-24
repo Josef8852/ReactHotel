@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { login as LoginApi } from "../../services/apiAuth"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast";
+import type { LoginFormValues } from "./authTypes";
 
 
 
@@ -14,7 +15,7 @@ export const useLogin = () => {
   
   const {mutate : login , isPending} = useMutation({
       
-    mutationFn : ({email , password} : {email  :string , password : string}) => LoginApi({email , password}),
+    mutationFn : ({email , password} :LoginFormValues) => LoginApi({email , password}),
     
     onSuccess: (data) => {
       toast.success("Loged in Successfully!");
