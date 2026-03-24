@@ -17,6 +17,7 @@ import BookingPage from "./pages/BookingPage";
 import CheckIn from "./pages/CheckIn";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import Users from "./pages/Users";
+import DarkModeProvider from "./context/DarkModeProvider";
 
 
 const queryClient = new QueryClient({
@@ -33,6 +34,7 @@ const queryClient = new QueryClient({
 const App: React.FC = () => {
     
   return (
+    <DarkModeProvider>
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Toaster position="top-center"
@@ -72,6 +74,7 @@ const App: React.FC = () => {
         </Routes>
         </BrowserRouter>
       </QueryClientProvider>
+    </DarkModeProvider>
   )
   
 }
