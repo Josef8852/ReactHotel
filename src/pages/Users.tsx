@@ -1,7 +1,13 @@
+import SignupForm from "../features/auth/SignupForm";
 import Heading from "../ui/Heading";
 
-const NewUsers:React.FC = () => {
-  return <Heading as="h1">Create a new user</Heading>;
+const Users:React.FC = () => {
+  return (
+    <>
+      <Heading as="h1">Create a new user</Heading>
+      <SignupForm/>
+    </>
+  )
 }
 
-export default NewUsers;
+export default Users;

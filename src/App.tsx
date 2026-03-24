@@ -9,7 +9,6 @@ import Account from "./pages/Account";
 import Cabins from "./pages/Cabins";
 import Login from "./pages/Login";
 import Settings from "./pages/Settings";
-import NewUsers from "./pages/Users";
 import Bookings from "./pages/Bookings";
 import PageNotFound from "./pages/PageNotFound";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -17,6 +16,7 @@ import AppLayout from "./ui/AppLayout";
 import BookingPage from "./pages/BookingPage";
 import CheckIn from "./pages/CheckIn";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
+import Users from "./pages/Users";
 
 
 const queryClient = new QueryClient({
@@ -60,7 +60,7 @@ const App: React.FC = () => {
             <Route path="/account" element={<Account />} />
             <Route path="/cabins" element={<Cabins />} /> 
             <Route path="/settings" element={<Settings />} />
-            <Route path="/users" element={<NewUsers />} />
+            <Route path="/users" element={<Users />} />
             <Route path="/bookings" element={<Bookings />} /> 
             <Route path="/booking/:bookingId" element={<BookingPage />} /> 
             <Route path="/checkin/:bookingId" element={<CheckIn />} /> 
