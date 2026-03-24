@@ -31,11 +31,10 @@ const UserAvatar: React.FC = () => {
 
   const { fullName, avatar } = user?.user_metadata || {};
   
-
   
   return (
     <StyledUserAvatar>
-      <Avatar alt="User Image" src={avatar || "default-user.jpg"}></Avatar>
+      <Avatar alt="User Image" src={String(avatar) || "default-user.jpg"}></Avatar>
       <span>{fullName}</span>
     </StyledUserAvatar>
   )

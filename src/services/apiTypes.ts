@@ -33,3 +33,19 @@ interface LoginData {
 
 export type LoginType = ({ email, password }: { email: string, password: string })
   => Promise<LoginData>
+  
+  
+  
+export interface UpdateUserArgs {
+  password: string; 
+  fullName: string; 
+  avatar: File; 
+}
+
+
+export interface updatedData  {
+  password: string;
+  data: {
+    fullName: string;
+  }
+}
