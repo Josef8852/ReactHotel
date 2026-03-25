@@ -194,23 +194,27 @@ export type SortOptionsObj = {
   
 }
 
-export type  FilterOptionsObj = {
+export type FilterOptionsObj = {
+  
+  // For known values and labels and allow other strings 
+  // that cant be hardcoded ;
+  
   value:
-  "all" |
+  ("all" |
   "no-discount" |
   "with-discount" |
   "checked_out" |
   "checked_in" |
-  "unconfirmed";
+  "unconfirmed" ) | string 
   
   
   label:
-  "All" |
+  ("All" |
   "No discount" |
   "With Discount" |
   "Checked out" |
   "Checked in" |
-  "Unconfirmed"
+  "Unconfirmed" ) | string
 }
 
 export interface FilterProps {
@@ -254,3 +258,5 @@ export interface CheckboxProps {
   disabled: boolean; 
   id: string;
 }
+
+

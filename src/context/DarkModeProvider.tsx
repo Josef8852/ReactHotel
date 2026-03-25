@@ -26,6 +26,8 @@ const DarkModeProvider:React.FC<DarkModeProviderProps> = ({children}) => {
   const toggleDarkMode = () : void => {
     setIsDarkMode((mode) => !mode)
   }  
+  
+  
   return (
     <DarkModeContext.Provider value={{
       isDarkMode,toggleDarkMode
