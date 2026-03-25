@@ -2,6 +2,8 @@ import { useRecentBookings } from "./useRecentBookings";
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
 import { useRecentStays } from "./useRecentStays";
+import Stats from "./Stats";
+import { useCabins } from "../cabins/useCabins";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -17,13 +19,16 @@ const DashboardLayout: React.FC = () => {
   
   const { isLoading : bookingLoading, bookings } = useRecentBookings();
   
-  const { isLoading : staysLoading, stays, confirmedStays } = useRecentStays();
+  const { isLoading: staysLoading, stays, confirmedStays, numDays } = useRecentStays();
+  
+  const {cabins, isLoading : cabinsLoading} = useCabins();
  
-  if(bookingLoading || staysLoading) return <Spinner/>
+  if(bookingLoading || staysLoading || cabinsLoading) return <Spinner/>
   
   return (
     <StyledDashboardLayout>
-      
+      <Stats bookings={bookings!} confirmedStays={confirmedStays!} numDays={numDays}
+        totalCabins={cabins?.length ?? 0} /> 
     </StyledDashboardLayout>
   )
   
