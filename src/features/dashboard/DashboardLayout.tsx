@@ -5,6 +5,7 @@ import { useRecentStays } from "./useRecentStays";
 import Stats from "./Stats";
 import { useCabins } from "../cabins/useCabins";
 import SalesChart from "./SalesChart";
+import DurationChart from "./DurationCharts";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -30,6 +31,7 @@ const DashboardLayout: React.FC = () => {
     <StyledDashboardLayout>
       <Stats bookings={bookings ?? []} confirmedStays={confirmedStays ?? []} numDays={numDays}
         totalCabins={cabins?.length ?? 0} /> 
+      <DurationChart confirmedStays={confirmedStays ?? []}/>
       <SalesChart bookings={bookings ?? []} numDays={numDays} />
     </StyledDashboardLayout>
   )

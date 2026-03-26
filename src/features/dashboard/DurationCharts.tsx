@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import type { DurationChartDataShape, DurationChartProps } from "./dashboardTypes";
+import Heading from "../../ui/Heading";
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import useDarkMode from "../../context/useDarkMode";
+import type { Booking } from "../bookings/BookingTypes";
 
 const ChartBox = styled.div`
-  /* Box */
+
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
@@ -18,7 +23,7 @@ const ChartBox = styled.div`
   }
 `;
 
-const startDataLight = [
+const dataLight : DurationChartDataShape[] = [
   {
     duration: "1 night",
     value: 0,
@@ -61,7 +66,7 @@ const startDataLight = [
   },
 ];
 
-const startDataDark = [
+const dataDark : DurationChartDataShape[] = [
   {
     duration: "1 night",
     value: 0,
@@ -104,10 +109,10 @@ const startDataDark = [
   },
 ];
 
-const prepareData = (startData, stays) => {
+const prepareData = (startData:DurationChartDataShape[], stays: Booking[]) => {
 
 
-  const  incArrayValue = (arr, field) => {
+  const  incArrayValue = (arr :DurationChartDataShape[], field : string) => {
     return arr.map((obj) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
     );
@@ -132,3 +137,52 @@ const prepareData = (startData, stays) => {
 
   return data;
 }
+
+
+
+const DurationChart: React.FC<DurationChartProps> = ({confirmedStays}) => {
+  
+  const { isDarkMode } = useDarkMode();
+  
+  const startData = isDarkMode ? dataDark : dataLight 
+
+  const data = prepareData(startData , confirmedStays)
+  
+  return (
+    <ChartBox>
+      <Heading as="h2">Stay duration summary</Heading>
+      <ResponsiveContainer width="100%" height={240}  >
+        <PieChart>
+          <Pie
+            data={data}
+            nameKey="duration"
+            dataKey="value"
+            innerRadius={85}
+            outerRadius={110}
+            cx="40%"
+            cy="50%"
+            paddingAngle={3}
+            // Cell is depricated and will be removed in v4
+          >{data.map((entry : DurationChartDataShape) => <Cell
+            fill={entry.color}
+            stroke={entry.color}
+            key={entry.duration}
+          />)}</Pie>
+          <Tooltip />
+          <Legend
+            verticalAlign="middle"
+            align="right"
+            width="30%"
+            layout="vertical"
+            iconSize={15}
+            iconType="circle"
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </ChartBox>
+  ) 
+  
+}
+
+
+export default DurationChart; 

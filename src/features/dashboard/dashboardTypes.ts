@@ -26,3 +26,14 @@ export interface ChartDataShape {
   totalSales: number; 
   extrasSales: number;
 }
+
+export interface DurationChartProps {
+    confirmedStays: Booking[];
+}
+
+
+export interface DurationChartDataShape {
+  duration: string; 
+  value: number; 
+  color: string; 
+}
