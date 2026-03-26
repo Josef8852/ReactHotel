@@ -3,6 +3,7 @@ import { getToday } from "../utils/helpers";
 import type { Filter, getBookingsPromise, Sort } from "./apiTypes";
 import { MAX_BOOKINGS } from "../utils/constants";
 import supabase from "./supabase";
+import { endOfDay, isToday, startOfDay } from "date-fns";
 
 
 export const getBookings = async (filter: Filter, sort: Sort, page: number)
@@ -78,7 +79,7 @@ export const getStaysAfterDate = async (date : string) : Promise<Booking[]> => {
     .from("bookings")
     .select("*, guests(fullName)")
     .gte("startDate", date)
-    .lte("startDate", getToday());
+    .lte("startDate", getToday({end: true}));
 
   if (error) {
     console.error(error);
@@ -89,25 +90,36 @@ export const getStaysAfterDate = async (date : string) : Promise<Booking[]> => {
 }
 
 // Activity means that there is a check in or a check out today
-export const  getStaysTodayActivity = async () => {
+
+export const getStaysTodayActivity = async (): Promise<Booking[]> => {
+  const todayStart = startOfDay(new Date()).toISOString();
+  const todayEnd = endOfDay(new Date()).toISOString();
+
   const { data, error } = await supabase
     .from("bookings")
     .select("*, guests(fullName, nationality, countryFlag)")
     .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
+      `status.eq.unconfirmed,startDate.gte.${todayStart},startDate.lte.${todayEnd}`
+    )
+    .or(
+      `status.eq.checked_in,endDate.gte.${todayStart},endDate.lte.${todayEnd}`
     )
     .order("created_at");
-
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
-  // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
-  // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
 
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
   }
-  return data;
-}
+  
+  // Coming or leaving today
+  const todayBookings = data?.filter(
+     (booking) =>
+       (booking.status === "unconfirmed" && isToday(new Date(booking.startDate))) ||
+       (booking.status === "checked_in" && isToday(new Date(booking.endDate)))
+   );
+
+  return todayBookings;
+};
 
 export const updateBooking = async (id : number , obj:Partial<Booking>) => {
   const { data, error } = await supabase

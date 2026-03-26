@@ -6,6 +6,7 @@ import Stats from "./Stats";
 import { useCabins } from "../cabins/useCabins";
 import SalesChart from "./SalesChart";
 import DurationChart from "./DurationCharts";
+import TodayActivity from "../checkInOut/TodayActivity";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -21,7 +22,7 @@ const DashboardLayout: React.FC = () => {
   
   const { isLoading : bookingLoading, bookings } = useRecentBookings();
   
-  const { isLoading: staysLoading, stays, confirmedStays, numDays } = useRecentStays();
+  const { isLoading: staysLoading, confirmedStays, numDays } = useRecentStays();
   
   const {cabins, isLoading : cabinsLoading} = useCabins();
  
@@ -31,6 +32,7 @@ const DashboardLayout: React.FC = () => {
     <StyledDashboardLayout>
       <Stats bookings={bookings ?? []} confirmedStays={confirmedStays ?? []} numDays={numDays}
         totalCabins={cabins?.length ?? 0} /> 
+      <TodayActivity/>
       <DurationChart confirmedStays={confirmedStays ?? []}/>
       <SalesChart bookings={bookings ?? []} numDays={numDays} />
     </StyledDashboardLayout>
