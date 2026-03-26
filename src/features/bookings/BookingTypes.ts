@@ -4,7 +4,7 @@ import type { Guest } from "../guests/GuestsTypes";
 // DB
 export interface Booking {
   id: number;
-  created_at: Date; 
+  created_at: Date | string | number; 
   startDate: Date; 
   endDate: Date; 
   numNights: number; 

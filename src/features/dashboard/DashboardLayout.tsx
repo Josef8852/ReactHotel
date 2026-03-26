@@ -4,6 +4,7 @@ import Spinner from "../../ui/Spinner";
 import { useRecentStays } from "./useRecentStays";
 import Stats from "./Stats";
 import { useCabins } from "../cabins/useCabins";
+import SalesChart from "./SalesChart";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -27,8 +28,9 @@ const DashboardLayout: React.FC = () => {
   
   return (
     <StyledDashboardLayout>
-      <Stats bookings={bookings!} confirmedStays={confirmedStays!} numDays={numDays}
+      <Stats bookings={bookings ?? []} confirmedStays={confirmedStays ?? []} numDays={numDays}
         totalCabins={cabins?.length ?? 0} /> 
+      <SalesChart bookings={bookings ?? []} numDays={numDays} />
     </StyledDashboardLayout>
   )
   

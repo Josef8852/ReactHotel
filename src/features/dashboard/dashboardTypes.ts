@@ -16,3 +16,13 @@ export interface StatsProps {
   numDays: number; 
   totalCabins: number;
 }
+
+
+export type SalesChartProps = Omit<StatsProps, "confirmedStays" | "totalCabins"> 
+
+
+export interface ChartDataShape {
+  label: string;
+  totalSales: number; 
+  extrasSales: number;
+}
