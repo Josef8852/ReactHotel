@@ -116,6 +116,8 @@ const Toggle: React.FC<ToggleProps> = ({ id }) => {
   
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     
+    e.stopPropagation();
+    
     const rect = e.currentTarget.closest("button")?.getBoundingClientRect();
     
     if (rect) setPosition({
@@ -145,7 +147,7 @@ const List: React.FC<ListProps> = ({ id ,children }) => {
   const { openId, $position ,close } = useContext(MenusContext);
   
   // We pass the desired Html Element
-  const { ref } = useClickOutside<HTMLUListElement>(close); 
+  const { ref } = useClickOutside<HTMLUListElement>(close , false); 
   
   
   if (openId !== id) return null;

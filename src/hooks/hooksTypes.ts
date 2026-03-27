@@ -7,5 +7,6 @@ export type Handler = () => void;
 // Generic type  ->  pass any Html element to use the hook 
 
 export type useClickType = <T extends HTMLElement>(
-  handler: Handler
+  handler: Handler,
+  listen: boolean 
 ) => { ref: RefObject<T | null> };

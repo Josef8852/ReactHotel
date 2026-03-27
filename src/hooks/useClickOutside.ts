@@ -2,7 +2,7 @@ import { useRef , useEffect } from "react";
 import type { Handler, useClickType } from "./hooksTypes";
 
 
-export const useClickOutside : useClickType = <T extends HTMLElement>(handler : Handler) => {
+export const useClickOutside : useClickType = <T extends HTMLElement>(handler : Handler , listen = true) => {
   
   const ref = useRef<T | null>(null);
 
@@ -15,11 +15,11 @@ export const useClickOutside : useClickType = <T extends HTMLElement>(handler : 
     }
   }
   
-  document.addEventListener("click", handleClick ,true);
+  document.addEventListener("click", handleClick ,listen);
   
-  return () => document.removeEventListener("click", handleClick ,true);
+  return () => document.removeEventListener("click", handleClick ,listen);
   
-}, [handler])
+}, [handler , listen])
   
   return { ref };
   
