@@ -8,9 +8,9 @@ import { DarkModeContext } from "./useDarkMode";
 
 const DarkModeProvider:React.FC<DarkModeProviderProps> = ({children}) => {
   
-  const osMode: boolean = window.matchMedia("(prefers-color-scheme:dark)").matches  ; 
+  const matchesDarkMode: boolean = window.matchMedia("(prefers-color-scheme:dark)").matches  ; 
   
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(osMode);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(matchesDarkMode);
   
     
   useEffect(() => {
