@@ -93,7 +93,7 @@ const Window:React.FC<WindowProps> = ({children  ,name}) => {
 
   const { openName, close } = useContext(ModalContext);
   
-  const { ref } = useClickOutside<HTMLDivElement>(close);
+  const { ref } = useClickOutside<HTMLDivElement>(close ,true);
   
   // React Portal -> Render Anywhere (Modal stays in the Component Tree)
 
