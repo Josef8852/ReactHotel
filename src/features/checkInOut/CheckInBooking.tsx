@@ -65,7 +65,8 @@ const CheckInBooking: React.FC = () => {
         isPaid: true,
         status: "checked_in", 
         hasBreakfast: isBreakfast ?? false,
-        totalPrice : booking.totalPrice + totalBreakfastPrice
+        totalPrice: booking.totalPrice + totalBreakfastPrice,
+        extrasPrice: totalBreakfastPrice ,
       }
     });
   }
