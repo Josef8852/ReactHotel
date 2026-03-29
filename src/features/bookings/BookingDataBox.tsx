@@ -171,12 +171,9 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
 
         <Price $isPaid={isPaid}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
-            {formatCurrency(totalPrice + totalBreakfastPrice)}
+            {formatCurrency(totalPrice)}
 
-            {hasBreakfast &&
-              ` (${formatCurrency(totalPrice)} cabin + ${formatCurrency(
-                totalBreakfastPrice
-              )} breakfast)`}
+      
           </DataItem>
 
           <p>{isPaid ? "Paid" : "Will pay at property"}</p>
