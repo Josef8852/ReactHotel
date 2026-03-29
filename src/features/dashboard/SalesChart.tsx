@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import styled from "styled-components";
 import DashboardBox from "./DashboardBox";
-import useDarkMode from "../../context/useDarkMode";
+import useAppContext from "../../context/useAppContext";
 import type { ChartDataShape, SalesChartProps } from "./dashboardTypes";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import Heading from "../../ui/Heading";
@@ -27,7 +27,7 @@ const StyledSalesChart = styled(DashboardBox)`
 const SalesChart: React.FC<SalesChartProps> = ({bookings,numDays}) => {
   
   
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode } = useAppContext();
   
   const allDates : Array<string | number | Date> = eachDayOfInterval({
     start: subDays(new Date(), numDays - 1), // From today to currentdays - 1

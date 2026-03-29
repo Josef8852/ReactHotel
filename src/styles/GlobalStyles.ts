@@ -191,6 +191,16 @@ const GlobalStyles = createGlobalStyle`
     filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
   }
   
+  
+  .hamburger {
+  display : none ; 
+  }
+  
+  @media(max-width:1279px) {
+      .hamburger {
+      display : block ;
+      }
+  }
  
   
 `

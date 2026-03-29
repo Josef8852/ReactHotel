@@ -10,6 +10,12 @@ const StyledFilter = styled.div`
   padding: 0.4rem;
   display: flex;
   gap: 0.4rem;
+  
+  
+  @media(max-width:920px){
+      margin-top : 2rem;
+  }
+  
 `;
 
 
@@ -36,6 +42,11 @@ const FilterButton = styled.button<{$active?: boolean | null}>`
     background-color: var(--color-brand-600);
     color: var(--color-brand-50);
   }
+  
+  @media(max-width:920px){
+  font-size : 1.15rem ;
+  }
+  
 `;
 
 

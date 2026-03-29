@@ -7,6 +7,7 @@ import {
   HiOutlineUsers,
   HiOutlineCog6Tooth
 } from "react-icons/hi2"
+import useAppContext from "../context/useAppContext";
 
 
 
@@ -57,18 +58,22 @@ const StyledNavLink = styled(NavLink)` // We can pass Components into styled
 
 
 const MainNav: React.FC = () => {
+  
+  const {toggleBurger , isBurger } = useAppContext();
+  
   return (
     <nav>
       <NavList>
         
-        <li>
+        <li  onClick={() => isBurger ? toggleBurger() : null} >
           <StyledNavLink to="/dashboard">
             <HiOutlineHome />
             <span>Home</span>
           </StyledNavLink>
         </li>
         
-        <li>
+        <li onClick={() => isBurger ? toggleBurger() : null} >
+        
           <StyledNavLink to="/bookings">
             <HiOutlineCalendarDays />
             <span>Bookings</span>
@@ -76,14 +81,14 @@ const MainNav: React.FC = () => {
         </li>
         
         
-        <li>
+        <li onClick={() => isBurger ? toggleBurger() : null}>
           <StyledNavLink to="/cabins">
             <HiOutlineHomeModern />
             <span>Cabins</span>
           </StyledNavLink>
         </li>
         
-        <li>
+        <li onClick={() => isBurger ? toggleBurger() : null}>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
             <span>Users</span>
@@ -91,7 +96,7 @@ const MainNav: React.FC = () => {
         </li>
         
         
-        <li>
+        <li onClick={() => isBurger ? toggleBurger() : null}>
           <StyledNavLink to="/settings">
             <HiOutlineCog6Tooth />
             <span>Settings</span>

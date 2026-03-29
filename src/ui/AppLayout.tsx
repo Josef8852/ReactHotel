@@ -21,6 +21,13 @@ const StyledAppLayout = styled.div`
   grid-template-rows: auto 1fr ;
   height:100vh;
   
+  @media(max-width:1279px) {
+      
+      grid-template-columns: 1fr ;
+   
+  
+  }
+  
   
   `
 

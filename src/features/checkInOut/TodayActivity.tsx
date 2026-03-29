@@ -51,7 +51,7 @@ const TodayActivity: React.FC = () => {
   if(!activities) return <Spinner/>
   
   return (
-    <StyledToday>
+      <StyledToday>
         <Row $variant="horizontal">
           <Heading as="h2">Today</Heading>
       </Row>

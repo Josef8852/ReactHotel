@@ -18,6 +18,9 @@ const Row = styled.div<RowProps>`
         gap:1.6rem;
       `}
   
+    @media(max-width:920px){
+    flex-direction : column ;
+    }
       
 `
 

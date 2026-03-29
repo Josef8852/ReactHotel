@@ -9,6 +9,12 @@ const StyledHeader = styled.header`
   display : flex ;
   align-items: center ;
   justify-content : flex-end ;
+  
+  @media(max-width:1279px) {
+      
+      justify-content : center ;
+      
+  }
   `
 
 const Header: React.FC = () => {

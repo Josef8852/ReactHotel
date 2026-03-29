@@ -1,6 +1,7 @@
-import styled from "styled-components";
-import useDarkMode from "../context/useDarkMode";
 import { useState } from "react";
+import styled from "styled-components";
+import useAppContext  from "../context/useAppContext";
+
 
 const StyledLogo = styled.div`
   text-align: center;
@@ -13,7 +14,7 @@ const Img = styled.img`
 
 const Logo: React.FC = () => {
   
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode } = useAppContext();
   
   const [loaded , setLoaded] = useState<boolean>(false)
   

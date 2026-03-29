@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
-import type { DarkModeProviderProps } from "./contextTypes";
-import { DarkModeContext } from "./useDarkMode";
+import type { AppProviderProps } from "./contextTypes";
+import { AppContext } from "./useAppContext";
 
 
-
-
-
-const DarkModeProvider:React.FC<DarkModeProviderProps> = ({children}) => {
+const AppProvider:React.FC<AppProviderProps> = ({children}) => {
   
   const matchesDarkMode: boolean = window.matchMedia("(prefers-color-scheme:dark)").matches  ; 
   
   const [isDarkMode, setIsDarkMode] = useState<boolean>(matchesDarkMode);
   
+  
+  const [isBurger, setIsBurger] = useState<boolean>(false);
     
   useEffect(() => {
     if (isDarkMode) {
@@ -27,20 +26,24 @@ const DarkModeProvider:React.FC<DarkModeProviderProps> = ({children}) => {
   
   const toggleDarkMode = () : void => {
     setIsDarkMode((mode) => !mode)
-  }  
+  }
+ 
+  const toggleBurger = () :void => {
+    setIsBurger((isBurger) => !isBurger);
+  }
   
   
   return (
-    <DarkModeContext.Provider value={{
-      isDarkMode,toggleDarkMode
+    <AppContext.Provider value={{
+      isDarkMode,toggleDarkMode,isBurger,toggleBurger
     }}>
       {children}
-    </DarkModeContext.Provider>
+    </AppContext.Provider>
   )
 }
 
 
-export default DarkModeProvider;
+export default AppProvider;
 
 
 

@@ -1,27 +1,33 @@
 import { HiOutlineUser } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import styled from "styled-components";
 import Logout from "../features/auth/Logout";
 import ButtonIcon from "./ButtonIcon";
 import UserAvatar from "../features/auth/UserAvatar";
-import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
-import useDarkMode from "../context/useDarkMode";
+import useAppContext from "../context/useAppContext";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 
 
 const StyledHeaderMenu = styled.ul`
   display:flex ; 
+  align-items:center ;
+  justify-content : center ;
   gap:2rem ;
   `
+
+
+
 
 
 const HeaderMenu: React.FC = () => {
   
   const navigate = useNavigate();
   
-  const {isDarkMode , toggleDarkMode} = useDarkMode();
+  const {isDarkMode , toggleDarkMode} = useAppContext();
   
-  
+  const { toggleBurger } = useAppContext();
   
   return (
     <StyledHeaderMenu>
@@ -44,7 +50,9 @@ const HeaderMenu: React.FC = () => {
         <Logout  />
       </li>
     
-      
+      <ButtonIcon className="hamburger" aria-label="hamburger" onClick={toggleBurger} >
+          <RxHamburgerMenu  />
+      </ButtonIcon>
   </StyledHeaderMenu>  
   )
   

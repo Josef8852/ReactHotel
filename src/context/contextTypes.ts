@@ -2,11 +2,13 @@ import type { ReactNode } from "react";
 
 
 
-export interface DarkModeContextTypes {
+export interface AppContextTypes {
   isDarkMode: boolean; 
   toggleDarkMode: () => void; 
+  isBurger: boolean; 
+  toggleBurger: () => void;
 }
 
-export interface DarkModeProviderProps {
+export interface AppProviderProps {
   children: ReactNode;
 }
