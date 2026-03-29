@@ -19,7 +19,7 @@ const Logo: React.FC = () => {
   
   return (
     <StyledLogo>
-      <Img style={{display : loaded ? "block" : "none"}} onLoad={() => setLoaded(true)} src={`${isDarkMode ? "LogoLight.png" : "LogoDark.png"}`} alt="Logo" />
+      <Img style={{display : loaded ? "inline-block" : "none"}} onLoad={() => setLoaded(true)} src={`${isDarkMode ? "LogoLight.png" : "LogoDark.png"}`} alt="Logo" />
     </StyledLogo>
   );
 }
