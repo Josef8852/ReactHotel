@@ -8,7 +8,6 @@ import {
 import { Flag } from "../../ui/Flag";
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 import type { BookingDataBoxProps } from "./BookingTypes";
-import { useSettings } from "../settings/useSettings";
 import DataItem from "../../ui/DataItem";
 import styled from "styled-components";
 
@@ -120,10 +119,8 @@ const BookingDataBox:React.FC<BookingDataBoxProps> = ({ booking }) => {
     cabins: { name: cabinName },
   } = booking;
 
-  const { settings } = useSettings();
   
-  
-  const totalBreakfastPrice: number = (settings?.breakfastPrice ?? 0) * numGuests * numNights ;
+
   
   return (
     <StyledBookingDataBox>
