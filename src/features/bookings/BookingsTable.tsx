@@ -15,7 +15,7 @@ const BookingsTable: React.FC = () => {
   
   if (isLoading) return <Spinner />
 
-    const isMobile = window.innerWidth < 920;
+  const isMobile = window.innerWidth < 920;
   
   return (
     <Menus>
