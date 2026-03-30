@@ -4,6 +4,13 @@ const TableOperations = styled.div`
   display: flex;
   align-items: center;
   gap: 1.6rem;
+  
+  
+  @media(max-width:920px){
+  flex-direction : column ;
+  }
+  
+  
 `;
 
 export default TableOperations;

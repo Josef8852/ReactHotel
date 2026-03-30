@@ -196,12 +196,16 @@ const GlobalStyles = createGlobalStyle`
   display : none ; 
   }
   
+ 
+  
   @media(max-width:1279px) {
       .hamburger {
       display : block ;
       }
   }
  
+ 
+  }
   
 `
 

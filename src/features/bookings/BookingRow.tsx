@@ -66,6 +66,8 @@ const BookingRow: React.FC<BookingRowProps> = ({
   
   const isPending : boolean = isDeleting || isCheckingOut;
   
+  const isMobile = window.innerWidth < 920;
+  
   if(isPending) return <Spinner/>
   
   return (
@@ -77,18 +79,18 @@ const BookingRow: React.FC<BookingRowProps> = ({
         <span>{email}</span>
       </Stacked>
 
-      <Stacked>
-        <span>
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
-        </span>
-        <span>
-          {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
-          {format(new Date(endDate), "MMM dd yyyy")}
-        </span>
-      </Stacked>
+    {!isMobile ? (  <Stacked>
+      <span>
+        {isToday(new Date(startDate))
+          ? "Today"
+          : formatDistanceFromNow(startDate)}{" "}
+        &rarr; {numNights} night stay
+      </span>
+      <span>
+        {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
+        {format(new Date(endDate), "MMM dd yyyy")}
+      </span>
+    </Stacked>) : null}
 
       <Tag $type={statusToTagName[status]}>{status.replace("_", " ")}</Tag>
 

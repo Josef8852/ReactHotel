@@ -27,6 +27,11 @@ const CommonRow = styled.div<TableCommonRow>`
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
+  
+  @media(max-width:920px) {
+  grid-template-columns : 1fr ;
+  gap : 1.5rem;
+  }
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -57,6 +62,9 @@ const Footer = styled.footer`
   display: flex;
   justify-content: center;
   padding: 1.2rem;
+  
+  
+
 
   /* This will hide the footer when it contains no child elements*/
   &:not(:has(*)) {

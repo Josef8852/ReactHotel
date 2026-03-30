@@ -9,6 +9,10 @@ const StyledPagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  @media(max-width:920px) {
+      flex-direction : column ;
+  }
 `;
 
 const P = styled.p`
@@ -18,6 +22,11 @@ const P = styled.p`
   & span {
     font-weight: 600;
   }
+  
+  @media(max-width:920px) {
+     margin : 1rem;
+  }
+  
 `;
 
 const Buttons = styled.div`
@@ -40,6 +49,10 @@ const PaginationButton = styled.button<{$active? : boolean}>`
   gap: 0.4rem;
   padding: 0.6rem 1.2rem;
   transition: all 0.3s;
+
+  @media(max-width:920px) {
+     margin : 1rem;
+  }
 
   &:has(span:last-child) {
     padding-left: 0.4rem;
