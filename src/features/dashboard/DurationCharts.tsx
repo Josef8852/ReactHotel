@@ -4,6 +4,7 @@ import Heading from "../../ui/Heading";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import useAppContext from "../../context/useAppContext";
 import type { Booking } from "../bookings/BookingTypes";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 
 const ChartBox = styled.div`
@@ -145,7 +146,7 @@ const prepareData = (startData:DurationChartDataShape[], stays: Booking[]) => {
 const DurationChart: React.FC<DurationChartProps> = ({ confirmedStays }) => {
   const { isDarkMode } = useAppContext();
 
-  const isMobile = window.innerWidth < 920;
+  const isMobile = useMediaQuery("(max-width:920px)");
   
  
 
