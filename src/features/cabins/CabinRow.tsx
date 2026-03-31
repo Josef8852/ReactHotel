@@ -10,6 +10,7 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus  from "../../ui/Menus";
+import { RiDiscountPercentLine } from "react-icons/ri";
 
 
 const Img = styled.img`
@@ -26,6 +27,7 @@ const Cabin = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
+
 `;
 
 const Price = styled.div`
@@ -53,12 +55,12 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   
   return (
     <>
-    <Table.Row>
+    <Table.Row $variant="Cabin">
       <Img src={cabin.image} />
       <Cabin>{cabin.name}</Cabin>
       <div>Fits up to {cabin.maxCapacity}</div>
       <Price>{formatCurrency(cabin.regularPrice)}</Price>
-      {cabin.discount ?  <Discount>{formatCurrency(cabin.discount)}</Discount> : <span>&mdash;</span>}
+      {cabin.discount ?  <Discount>{formatCurrency(cabin.discount)} <RiDiscountPercentLine /></Discount> : <span>&mdash;</span>}
         <Container> 
           
             

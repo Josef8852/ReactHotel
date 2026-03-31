@@ -7,7 +7,7 @@ import type {
   TableContextTypes
 } from "./UITypes";
 import { createContext, useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 
 
@@ -28,10 +28,24 @@ const CommonRow = styled.div<TableCommonRow>`
   align-items: center;
   transition: none;
   
-  @media(max-width:920px) {
-  grid-template-columns : 1fr ;
-  gap : 1.5rem;
-  }
+  
+  // Booking Row
+  ${(props) => props.$variant === "Booking" && css`
+    @media(max-width:920px) {
+    grid-template-columns : 1fr;
+    gap : 1.5rem;
+    }
+    `}
+  
+  // Cabin Row
+  ${(props) => props.$variant === "Cabin" && css`
+    @media(max-width:920px) {
+    grid-template-columns : 1fr 1fr auto;
+    grid-template-rows : 1fr auto ;
+    gap : 2rem ;
+    }
+    `}
+  
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -114,12 +128,12 @@ const Header: React.FC<HeaderTableProps> = ({ children }) => {
 }
 
 
-const Row: React.FC<RowTableprops> = ({children}) => {
+const Row: React.FC<RowTableprops> = ({children , $variant}) => {
   
   const { $columns } = useContext(TableContext);
   
   return (
-    <StyledRow role="row" $columns={$columns}>
+    <StyledRow $variant={$variant} role="row" $columns={$columns}>
       {children}
     </StyledRow>
   )

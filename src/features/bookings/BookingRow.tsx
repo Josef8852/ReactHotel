@@ -71,7 +71,7 @@ const BookingRow: React.FC<BookingRowProps> = ({
   if(isPending) return <Spinner/>
   
   return (
-    <Table.Row>
+    <Table.Row $variant="Booking">
       <Cabin>{name}</Cabin>
 
       <Stacked>

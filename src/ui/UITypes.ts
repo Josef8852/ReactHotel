@@ -74,10 +74,12 @@ export interface ConfirmDeleteProps {
 
 export interface TableCommonRow {
   $columns: string;
+  $variant? : "Booking" | "Cabin"
 }
 
 export interface RowTableprops {
   children: ReactNode;
+  $variant : "Booking" | "Cabin"
 }
 
 export interface HeaderTableProps {
