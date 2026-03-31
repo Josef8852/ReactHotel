@@ -115,12 +115,12 @@ const Table: TableCompound = ({$columns ,children}) => {
   
 }
 
-const Header: React.FC<HeaderTableProps> = ({ children }) => {
+const Header: React.FC<HeaderTableProps> = ({ children , className }) => {
   
   const { $columns } = useContext(TableContext);
   
   return (
-    <StyledHeader role="row" $columns={$columns}>
+    <StyledHeader className={className} role="row" $columns={$columns}>
       {children}
     </StyledHeader>
   )

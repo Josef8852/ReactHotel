@@ -5,6 +5,7 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recha
 import useAppContext from "../../context/useAppContext";
 import type { Booking } from "../bookings/BookingTypes";
 
+
 const ChartBox = styled.div`
 
   background-color: var(--color-grey-0);
@@ -144,7 +145,9 @@ const prepareData = (startData:DurationChartDataShape[], stays: Booking[]) => {
 const DurationChart: React.FC<DurationChartProps> = ({ confirmedStays }) => {
   const { isDarkMode } = useAppContext();
 
-  const isMobile = window.innerWidth < 768;
+  const isMobile = window.innerWidth < 920;
+  
+ 
 
   const startData = isDarkMode ? dataDark : dataLight;
   const data = prepareData(startData, confirmedStays);

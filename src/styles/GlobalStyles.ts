@@ -195,12 +195,16 @@ const GlobalStyles = createGlobalStyle`
   .hamburger {
   display : none ; 
   }
-  
- 
-  
+
   @media(max-width:1279px) {
       .hamburger {
       display : block ;
+      }
+  }
+  
+  @media(max-width:920px) {
+      .hideHeader , .hide {
+      display : none ;
       }
   }
  

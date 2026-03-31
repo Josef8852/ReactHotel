@@ -83,7 +83,8 @@ export interface RowTableprops {
 }
 
 export interface HeaderTableProps {
-    children: ReactNode;
+  children: ReactNode;
+  className: string;
 }
 
 export interface BodyTableProps<T> {

@@ -15,20 +15,20 @@ const BookingsTable: React.FC = () => {
   
   if (isLoading) return <Spinner />
 
-  const isMobile = window.innerWidth < 920;
+  
   
   return (
     <Menus>
       <Table $columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">
         
-        {!isMobile ?  (   <Table.Header>
+        <Table.Header className="hideHeader">
           <div>Cabin</div>
           <div>Guest</div>
           <div>Dates</div>
           <div>Status</div>
           <div>Amount</div>
           <div></div>
-        </Table.Header>) : null}
+        </Table.Header>
 
         <Table.Body<Booking>
           data={bookings.data}
