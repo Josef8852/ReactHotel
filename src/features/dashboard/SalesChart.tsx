@@ -13,6 +13,7 @@ import useAppContext from "../../context/useAppContext";
 import type { ChartDataShape, SalesChartProps } from "./dashboardTypes";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import Heading from "../../ui/Heading";
+import { memo } from "react";
 
 
 const StyledSalesChart = styled(DashboardBox)`
@@ -113,4 +114,4 @@ const SalesChart: React.FC<SalesChartProps> = ({bookings,numDays}) => {
 }
 
 
-export default SalesChart;
+export default memo(SalesChart);

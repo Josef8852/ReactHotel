@@ -5,6 +5,7 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recha
 import useAppContext from "../../context/useAppContext";
 import type { Booking } from "../bookings/BookingTypes";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { memo } from "react";
 
 
 const ChartBox = styled.div`
@@ -192,4 +193,4 @@ const DurationChart: React.FC<DurationChartProps> = ({ confirmedStays }) => {
 };
 
 
-export default DurationChart; 
+export default memo(DurationChart); 

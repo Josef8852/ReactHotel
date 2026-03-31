@@ -15,6 +15,7 @@ import Table from "../../ui/Table";
 import styled from "styled-components";
 import Menus from "../../ui/Menus";
 import Spinner from "../../ui/Spinner";
+import { memo } from "react";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -145,4 +146,4 @@ const BookingRow: React.FC<BookingRowProps> = ({
   );
 }
 
-export default BookingRow;
+export default memo(BookingRow);

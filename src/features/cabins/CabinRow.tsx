@@ -11,6 +11,7 @@ import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus  from "../../ui/Menus";
 import { RiDiscountPercentLine } from "react-icons/ri";
+import { memo } from "react";
 
 
 const Img = styled.img`
@@ -113,4 +114,4 @@ const CabinRow: React.FC<CabinRowProps> = ({ cabin }) => {
   
 }
 
-export default CabinRow;
+export default memo(CabinRow);

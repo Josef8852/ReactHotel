@@ -5,6 +5,7 @@ import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";;
 import { useNavigate } from "react-router-dom";
 import { useCheckOut } from "./useCheckOut";
+import { memo } from "react";
 
 
 
@@ -71,4 +72,4 @@ const TodayItem: React.FC<TodayItemProps> = ({ activity }) => {
 }
 
 
-export default TodayItem
+export default memo(TodayItem);
