@@ -32,6 +32,11 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  @media(max-width:920px) {
+      flex-direction : column ;
+      gap : 2rem ;
+  }
 
   svg {
     height: 3.2rem;
@@ -63,6 +68,11 @@ const Guest = styled.div`
   gap: 1.2rem;
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
+  
+  @media(max-width:920px) {
+      flex-direction : column ;
+
+  }
 
   & p:first-of-type {
     font-weight: 500;
@@ -77,6 +87,11 @@ const Price = styled.div<{$isPaid : boolean}>`
   padding: 1.6rem 3.2rem;
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
+  
+  @media(max-width:920px) {
+      flex-direction : column ;
+      gap : 2rem ;
+  }
 
   background-color: ${(props) =>
     props.$isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
