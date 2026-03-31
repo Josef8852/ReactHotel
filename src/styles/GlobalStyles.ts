@@ -206,6 +206,15 @@ const GlobalStyles = createGlobalStyle`
       .hideHeader , .hide {
       display : none ;
       }
+      
+      .resForm {
+      width: 95%;
+       max-width: 600px;
+       height: auto;     
+       max-height: 90vh;   
+       padding: 1rem;
+       overflow-y: auto
+       }
   }
  
  

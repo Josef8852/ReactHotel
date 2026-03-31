@@ -54,7 +54,7 @@ const CabinForm: React.FC<CabinFormProps> = ({cabinToEdit , onCloseModal}) => {
  
   
   return (
-    <Form $type={onCloseModal ? "modal" : "regular"} onSubmit={handleSubmit(onSubmit)} >
+    <Form className="resForm" $type={onCloseModal ? "modal" : "regular"} onSubmit={handleSubmit(onSubmit)} >
       <FormRow id="name" label="Name" error={errors.name?.message} >
         <Input disabled={isPending} type="text" id="name" {...register("name",
           { required: "Required" })} />
