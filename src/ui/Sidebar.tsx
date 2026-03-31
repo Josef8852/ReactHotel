@@ -22,7 +22,6 @@ const StyledSidebar = styled.aside<{$isBurger : boolean}>`
       z-index : 999 ;
       height : 100dvh ;
       width : 100vw;
-       overflow-y: auto;
   }
   
   `
