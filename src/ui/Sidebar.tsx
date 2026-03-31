@@ -16,10 +16,13 @@ const StyledSidebar = styled.aside<{$isBurger : boolean}>`
   
   @media(max-width:1279px) {
       display : ${(props) => props.$isBurger ? "block" : "none" } ;
-      position : absolute ;
+      position : fixed ;
+      top: 0;
+       left: 0;
       z-index : 999 ;
-      height : 100% ; 
-      width : 100% ;
+      height : 100dvh ;
+      width : 100vw;
+       overflow-y: auto;
   }
   
   `
