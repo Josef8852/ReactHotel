@@ -4,13 +4,17 @@ import Logo from "../ui/Logo";
 import Heading from "../ui/Heading";
 
 const LoginLayout = styled.main`
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
-  grid-template-columns: 48rem;
+  grid-template-columns: min(90%, 48rem); 
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
+
+  @media (max-width: 920px) {
+    gap: 2rem; 
+  }
 `;
 
 const Login:React.FC = () => {
