@@ -12,9 +12,9 @@ import MiniSpinner from "../../ui/MiniSpinner";
 
 const LoginForm: React.FC = () => {
   
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("someemail@email.com");
   
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("123456789");
   
   const { login, isPending } = useLogin();
   
