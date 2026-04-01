@@ -46,3 +46,6 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/yourusername/react-hotel.git
+cd react-hotel
+npm install 
+npm run dev
